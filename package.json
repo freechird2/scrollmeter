@@ -1,0 +1,14 @@
+{
+    "name": "scrollmeter-workspace",
+    "private": true,
+    "workspaces": [
+        "core",
+        "examples"
+    ],
+    "scripts": {
+        "build": "yarn workspaces run build",
+        "test": "yarn workspaces run test",
+        "build:core": "yarn workspace @scrollmeter/core build",
+        "examples:dev": "yarn workspace examples dev"
+    }
+}
