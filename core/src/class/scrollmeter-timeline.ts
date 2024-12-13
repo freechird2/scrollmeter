@@ -51,7 +51,7 @@ export class ScrollmeterTimeline extends IScrollmeter {
         return true
     }
 
-    public createTimeline = (contentHeight: number, highestZIndex: number): HTMLElement[] => {
+    public createTimeline = (highestZIndex: number): HTMLElement[] => {
         const targetContainer = this.#scrollmeter.getTargetContainer()
         if (!targetContainer) return []
 
@@ -72,29 +72,42 @@ export class ScrollmeterTimeline extends IScrollmeter {
             const absoluteElementTop = element.getBoundingClientRect().top + window.scrollY
             const absoluteContainerTop = scrollContainer.getBoundingClientRect().top + window.scrollY
             const relativeTargetTop = absoluteElementTop - absoluteContainerTop
-            const relativePosition = (relativeTargetTop / (contentHeight - document.documentElement.clientHeight)) * 100
+            const scrollableHeight = scrollContainer.clientHeight - document.documentElement.clientHeight
 
-            const width = this.#scrollmeter.getDefaultOptions().timelineOptions?.width ?? 4
+            if (scrollableHeight > absoluteElementTop) {
+                const relativePosition = (relativeTargetTop / scrollableHeight) * 100
 
-            timelineElement.style.left = `${relativePosition > 100 ? `calc(100% - ${width}px)` : `${relativePosition}%`}`
-            timelineElement.style.zIndex = highestZIndex.toString()
-
-            timelineElement.addEventListener('click', () => {
-                element.scrollIntoView({ behavior: 'smooth' })
-            })
-
-            if (this.#scrollmeter.getDefaultOptions().useTooltip) {
-                const tooltip = new ScrollmeterTooltip(this.#scrollmeter)
-
-                tooltip.createTimelineTooltip(
-                    timelineElement,
-                    element,
-                    relativePosition < 7.6 ? 'left' : relativePosition > 92.4 ? 'right' : 'center'
+                console.log(
+                    scrollContainer.clientHeight,
+                    document.documentElement.clientHeight,
+                    scrollContainer.clientHeight - document.documentElement.clientHeight,
+                    absoluteElementTop,
+                    absoluteContainerTop,
+                    relativeTargetTop,
+                    relativePosition
                 )
-            }
+                const width = this.#scrollmeter.getDefaultOptions().timelineOptions?.width ?? 4
 
-            this.#scrollmeter.getScrollmeterContainer()?.appendChild(timelineElement)
-            timelineElements.push(timelineElement)
+                timelineElement.style.left = `${relativePosition > 100 ? `calc(100% - ${width}px)` : `${relativePosition}%`}`
+                timelineElement.style.zIndex = highestZIndex.toString()
+
+                timelineElement.addEventListener('click', () => {
+                    element.scrollIntoView({ behavior: 'smooth' })
+                })
+
+                if (this.#scrollmeter.getDefaultOptions().useTooltip) {
+                    const tooltip = new ScrollmeterTooltip(this.#scrollmeter)
+
+                    tooltip.createTimelineTooltip(
+                        timelineElement,
+                        element,
+                        relativePosition < 7.6 ? 'left' : relativePosition > 92.4 ? 'right' : 'center'
+                    )
+                }
+
+                this.#scrollmeter.getScrollmeterContainer()?.appendChild(timelineElement)
+                timelineElements.push(timelineElement)
+            }
         })
 
         this.setCSSCustomProperties()
