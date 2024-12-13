@@ -1,12 +1,12 @@
 var X = (c) => {
   throw TypeError(c);
 };
-var U = (c, h, l) => h.has(c) || X("Cannot " + l);
-var e = (c, h, l) => (U(c, h, "read from private field"), l ? l.call(c) : h.get(c)), s = (c, h, l) => h.has(c) ? X("Cannot add the same private member more than once") : h instanceof WeakSet ? h.add(c) : h.set(c, l), o = (c, h, l, n) => (U(c, h, "write to private field"), n ? n.call(c, l) : h.set(c, l), l), N = (c, h, l) => (U(c, h, "access private method"), l);
+var W = (c, h, l) => h.has(c) || X("Cannot " + l);
+var e = (c, h, l) => (W(c, h, "read from private field"), l ? l.call(c) : h.get(c)), s = (c, h, l) => h.has(c) ? X("Cannot add the same private member more than once") : h instanceof WeakSet ? h.add(c) : h.set(c, l), o = (c, h, l, n) => (W(c, h, "write to private field"), n ? n.call(c, l) : h.set(c, l), l), N = (c, h, l) => (W(c, h, "access private method"), l);
 import K from "html2canvas";
-class W {
+class Z {
 }
-const Q = "scrollmeter-module__scrollmeter_container___Jfedd", ee = "scrollmeter-module__scrollmeter_container___Jfedd", te = "scrollmeter-module__scrollmeter_bar___p8v2h", re = "scrollmeter-module__scrollmeter_bar___p8v2h", ie = "scrollmeter-module__scrollmeter_timeline___he3FL", oe = "scrollmeter-module__scrollmeter_timeline___he3FL", le = "scrollmeter-module__scrollmeter_timeline_tooltip___6ORWv", se = "scrollmeter-module__scrollmeter_timeline_tooltip___6ORWv", ne = "scrollmeter-module__scrollmeter_timeline_tooltip_left___TU1Oc", ce = "scrollmeter-module__scrollmeter_timeline_tooltip_left___TU1Oc", me = "scrollmeter-module__scrollmeter_timeline_tooltip_right___ogXqk", ae = "scrollmeter-module__scrollmeter_timeline_tooltip_right___ogXqk", he = "scrollmeter-module__scrollmeter_timeline_tooltip_center___rVCHc", _e = "scrollmeter-module__scrollmeter_timeline_tooltip_center___rVCHc", pe = "scrollmeter-module__scrollmeter_timeline_preview___FqLou", de = "scrollmeter-module__scrollmeter_timeline_preview___FqLou", w = {
+const Q = "scrollmeter-module__scrollmeter_container___Jfedd", ee = "scrollmeter-module__scrollmeter_container___Jfedd", te = "scrollmeter-module__scrollmeter_bar___p8v2h", re = "scrollmeter-module__scrollmeter_bar___p8v2h", ie = "scrollmeter-module__scrollmeter_timeline___he3FL", oe = "scrollmeter-module__scrollmeter_timeline___he3FL", le = "scrollmeter-module__scrollmeter_timeline_tooltip___6ORWv", se = "scrollmeter-module__scrollmeter_timeline_tooltip___6ORWv", ne = "scrollmeter-module__scrollmeter_timeline_tooltip_left___TU1Oc", ce = "scrollmeter-module__scrollmeter_timeline_tooltip_left___TU1Oc", me = "scrollmeter-module__scrollmeter_timeline_tooltip_right___ogXqk", ae = "scrollmeter-module__scrollmeter_timeline_tooltip_right___ogXqk", he = "scrollmeter-module__scrollmeter_timeline_tooltip_center___rVCHc", _e = "scrollmeter-module__scrollmeter_timeline_tooltip_center___rVCHc", de = "scrollmeter-module__scrollmeter_timeline_preview___FqLou", pe = "scrollmeter-module__scrollmeter_timeline_preview___FqLou", w = {
   scrollmeter_container: Q,
   scrollmeterContainer: ee,
   scrollmeter_bar: te,
@@ -21,97 +21,110 @@ const Q = "scrollmeter-module__scrollmeter_container___Jfedd", ee = "scrollmeter
   scrollmeterTimelineTooltipRight: ae,
   scrollmeter_timeline_tooltip_center: he,
   scrollmeterTimelineTooltipCenter: _e,
-  scrollmeter_timeline_preview: pe,
-  scrollmeterTimelinePreview: de
+  scrollmeter_timeline_preview: de,
+  scrollmeterTimelinePreview: pe
 };
-var d, R, $;
-class ue extends W {
+var p, z, k;
+class ue extends Z {
   constructor(l) {
     super();
-    s(this, d);
-    s(this, R);
-    s(this, $);
-    o(this, R, (n, t = 320) => {
-      const r = e(this, d).getCaptureCanvas();
+    s(this, p);
+    s(this, z);
+    s(this, k);
+    o(this, z, (n, t = 320) => {
+      const r = e(this, p).getCaptureCanvas();
       if (!r) return;
-      const i = r.width, a = i * 9 / 16, p = Math.max(0, n.getBoundingClientRect().top + window.scrollY - a / 2), f = t * 9 / 16, _ = document.createElement("canvas");
-      _.width = t, _.height = f;
-      const y = _.getContext("2d");
+      const i = r.width, m = i * 9 / 16, _ = Math.max(0, n.getBoundingClientRect().top + window.scrollY - m / 2), d = t * 9 / 16, f = document.createElement("canvas");
+      f.width = t, f.height = d;
+      const y = f.getContext("2d");
       return y ? (y.drawImage(
         r,
         0,
-        Math.max(0, Math.min(p, r.height - a)),
+        Math.max(0, Math.min(_, r.height - m)),
         // y값 범위 제한
         i,
-        a,
+        m,
         0,
         0,
         t,
-        f
-      ), _.toDataURL()) : null;
-    }), o(this, $, (n) => {
+        d
+      ), f.toDataURL()) : null;
+    }), o(this, k, (n) => {
       const t = document.createElement("div");
       t.classList.add(w.scrollmeter_timeline_preview);
       const r = new Image();
       return r.src = n, t.appendChild(r), t;
     }), this.createTimelineTooltip = (n, t, r) => {
       if (!t.textContent) return;
-      const i = document.createElement("div"), a = document.createElement("p");
-      if (e(this, d).getDefaultOptions().usePreview) {
-        const p = e(this, R).call(this, t);
-        if (p) {
-          const f = e(this, $).call(this, p);
-          i.appendChild(f);
+      const i = document.createElement("div"), m = document.createElement("p");
+      if (e(this, p).getDefaultOptions().usePreview) {
+        const _ = e(this, z).call(this, t);
+        if (_) {
+          const d = e(this, k).call(this, _);
+          i.appendChild(d);
         }
       }
-      i.classList.add(w.scrollmeter_timeline_tooltip), i.classList.add(w[`scrollmeter_timeline_tooltip_${r}`]), a.textContent = t.textContent, i.appendChild(a), this.setCSSCustomProperties(), n.appendChild(i);
-    }, o(this, d, l);
+      i.classList.add(w.scrollmeter_timeline_tooltip), i.classList.add(w[`scrollmeter_timeline_tooltip_${r}`]), m.textContent = t.textContent, i.appendChild(m), this.setCSSCustomProperties(), n.appendChild(i);
+    }, o(this, p, l);
   }
   setCSSCustomProperties() {
-    var n, t, r, i, a, p;
-    const l = e(this, d).getDefaultOptions();
+    var n, t, r, i, m, _;
+    const l = e(this, p).getDefaultOptions();
     if (l && l.tooltipOptions) {
-      const { background: f, fontColor: _, fontSize: y, paddingBlock: A, paddingInline: F, width: S } = l.tooltipOptions;
-      f && ((n = e(this, d).getScrollmeterContainer()) == null || n.style.setProperty("--scrollmeter-tooltip-background", f)), _ && ((t = e(this, d).getScrollmeterContainer()) == null || t.style.setProperty("--scrollmeter-tooltip-font-color", _)), y && ((r = e(this, d).getScrollmeterContainer()) == null || r.style.setProperty("--scrollmeter-tooltip-font-size", `${y}px`)), A && ((i = e(this, d).getScrollmeterContainer()) == null || i.style.setProperty("--scrollmeter-tooltip-padding-block", `${A}px`)), F && ((a = e(this, d).getScrollmeterContainer()) == null || a.style.setProperty("--scrollmeter-tooltip-padding-inline", `${F}px`)), S && ((p = e(this, d).getScrollmeterContainer()) == null || p.style.setProperty("--scrollmeter-tooltip-width", `${S}px`));
+      const { background: d, fontColor: f, fontSize: y, paddingBlock: H, paddingInline: L, width: R } = l.tooltipOptions;
+      d && ((n = e(this, p).getScrollmeterContainer()) == null || n.style.setProperty("--scrollmeter-tooltip-background", d)), f && ((t = e(this, p).getScrollmeterContainer()) == null || t.style.setProperty("--scrollmeter-tooltip-font-color", f)), y && ((r = e(this, p).getScrollmeterContainer()) == null || r.style.setProperty("--scrollmeter-tooltip-font-size", `${y}px`)), H && ((i = e(this, p).getScrollmeterContainer()) == null || i.style.setProperty("--scrollmeter-tooltip-padding-block", `${H}px`)), L && ((m = e(this, p).getScrollmeterContainer()) == null || m.style.setProperty("--scrollmeter-tooltip-padding-inline", `${L}px`)), R && ((_ = e(this, p).getScrollmeterContainer()) == null || _.style.setProperty("--scrollmeter-tooltip-width", `${R}px`));
     }
   }
 }
-d = new WeakMap(), R = new WeakMap(), $ = new WeakMap();
-var u, H, Y, j;
-class ge extends W {
+p = new WeakMap(), z = new WeakMap(), k = new WeakMap();
+var u, D, U, j;
+class ge extends Z {
   constructor(l) {
     super();
-    s(this, Y);
+    s(this, U);
     s(this, u);
-    s(this, H);
-    o(this, H, (n) => {
+    s(this, D);
+    o(this, D, (n) => {
       const t = [], r = (i) => {
-        i.tagName.toLowerCase() === "h1" && N(this, Y, j).call(this, i) && t.push(i), Array.from(i.children).forEach((a) => {
-          r(a);
+        i.tagName.toLowerCase() === "h1" && N(this, U, j).call(this, i) && t.push(i), Array.from(i.children).forEach((m) => {
+          r(m);
         });
       };
       return r(n), t;
-    }), this.createTimeline = (n, t) => {
-      const r = e(this, u).getTargetContainer();
-      if (!r) return [];
-      const i = e(this, H).call(this, r);
-      if (i.length === 0) return [];
-      const a = [];
-      return i.map((p) => {
-        var Z, J;
-        const f = e(this, u).getTargetContainer();
-        if (!f) return;
-        const _ = document.createElement("div");
-        _.classList.add(w.scrollmeter_timeline);
-        const y = p.getBoundingClientRect().top + window.scrollY, A = f.getBoundingClientRect().top + window.scrollY, S = (y - A) / (n - document.documentElement.clientHeight) * 100, G = ((Z = e(this, u).getDefaultOptions().timelineOptions) == null ? void 0 : Z.width) ?? 4;
-        _.style.left = `${S > 100 ? `calc(100% - ${G}px)` : `${S}%`}`, _.style.zIndex = t.toString(), _.addEventListener("click", () => {
-          p.scrollIntoView({ behavior: "smooth" });
-        }), e(this, u).getDefaultOptions().useTooltip && new ue(e(this, u)).createTimelineTooltip(
-          _,
-          p,
-          S < 7.6 ? "left" : S > 92.4 ? "right" : "center"
-        ), (J = e(this, u).getScrollmeterContainer()) == null || J.appendChild(_), a.push(_);
-      }), this.setCSSCustomProperties(), a;
+    }), this.createTimeline = (n) => {
+      const t = e(this, u).getTargetContainer();
+      if (!t) return [];
+      const r = e(this, D).call(this, t);
+      if (r.length === 0) return [];
+      const i = [];
+      return r.map((m) => {
+        var R, J;
+        const _ = e(this, u).getTargetContainer();
+        if (!_) return;
+        const d = document.createElement("div");
+        d.classList.add(w.scrollmeter_timeline);
+        const f = m.getBoundingClientRect().top + window.scrollY, y = _.getBoundingClientRect().top + window.scrollY, H = f - y, L = _.clientHeight - document.documentElement.clientHeight;
+        if (L > f) {
+          const $ = H / L * 100;
+          console.log(
+            _.clientHeight,
+            document.documentElement.clientHeight,
+            _.clientHeight - document.documentElement.clientHeight,
+            f,
+            y,
+            H,
+            $
+          );
+          const G = ((R = e(this, u).getDefaultOptions().timelineOptions) == null ? void 0 : R.width) ?? 4;
+          d.style.left = `${$ > 100 ? `calc(100% - ${G}px)` : `${$}%`}`, d.style.zIndex = n.toString(), d.addEventListener("click", () => {
+            m.scrollIntoView({ behavior: "smooth" });
+          }), e(this, u).getDefaultOptions().useTooltip && new ue(e(this, u)).createTimelineTooltip(
+            d,
+            m,
+            $ < 7.6 ? "left" : $ > 92.4 ? "right" : "center"
+          ), (J = e(this, u).getScrollmeterContainer()) == null || J.appendChild(d), i.push(d);
+        }
+      }), this.setCSSCustomProperties(), i;
     }, o(this, u, l);
   }
   setCSSCustomProperties() {
@@ -123,7 +136,7 @@ class ge extends W {
     }
   }
 }
-u = new WeakMap(), H = new WeakMap(), Y = new WeakSet(), j = function(l) {
+u = new WeakMap(), D = new WeakMap(), U = new WeakSet(), j = function(l) {
   const n = window.getComputedStyle(l);
   if (n.display === "none" || n.visibility === "hidden" || n.opacity === "0") return !1;
   let t = l.parentElement;
@@ -134,81 +147,81 @@ u = new WeakMap(), H = new WeakMap(), Y = new WeakSet(), j = function(l) {
   }
   return !0;
 };
-var C, m, g, T, v, z, x, b, E, P, O, I, k, D, M, B, L, V, q;
-class fe extends W {
+var C, a, g, S, T, M, v, b, E, x, P, O, V, q, A, I, B, Y, F;
+class fe extends Z {
   constructor(l) {
     super();
     s(this, C);
-    s(this, m);
+    s(this, a);
     s(this, g);
+    s(this, S);
     s(this, T);
+    s(this, M);
     s(this, v);
-    s(this, z);
-    s(this, x);
     s(this, b);
     s(this, E);
+    s(this, x);
     s(this, P);
     s(this, O);
-    s(this, I);
-    s(this, k);
-    s(this, D);
-    s(this, M);
-    s(this, B);
-    s(this, L);
     s(this, V);
     s(this, q);
-    o(this, k, () => {
-      if (!e(this, m))
+    s(this, A);
+    s(this, I);
+    s(this, B);
+    s(this, Y);
+    s(this, F);
+    o(this, V, () => {
+      if (!e(this, a))
         throw new Error("targetContainer is not found");
-      o(this, v, new ResizeObserver(async (t) => {
-        if (!e(this, m) || !e(this, g) || e(this, b) === t[0].contentRect.height) return;
+      o(this, T, new ResizeObserver(async (t) => {
+        if (!e(this, a) || !e(this, g) || e(this, b) === t[0].contentRect.height) return;
         o(this, b, t[0].contentRect.height);
-        const r = parseInt(window.getComputedStyle(e(this, m)).marginTop), i = parseInt(window.getComputedStyle(e(this, m)).marginBottom);
-        if (o(this, O, window.scrollY + e(this, m).getBoundingClientRect().top), o(this, P, e(this, m).clientHeight + r + i - document.documentElement.clientHeight), e(this, L).call(this), e(this, C).useTimeline) {
-          document.querySelectorAll(`.${w.scrollmeter_timeline}`).forEach((p) => {
-            p.remove();
-          }), e(this, C).usePreview && await e(this, q).call(this);
-          const a = new ge(this);
-          o(this, z, a.createTimeline(e(this, b), e(this, I)));
+        const r = parseInt(window.getComputedStyle(e(this, a)).marginTop), i = parseInt(window.getComputedStyle(e(this, a)).marginBottom);
+        if (o(this, P, window.scrollY + e(this, a).getBoundingClientRect().top), o(this, x, e(this, a).clientHeight + r + i - document.documentElement.clientHeight), e(this, B).call(this), e(this, C).useTimeline) {
+          document.querySelectorAll(`.${w.scrollmeter_timeline}`).forEach((_) => {
+            _.remove();
+          }), e(this, C).usePreview && await e(this, F).call(this);
+          const m = new ge(this);
+          o(this, M, m.createTimeline(e(this, O)));
         }
       }));
-    }), o(this, D, () => {
+    }), o(this, q, () => {
       try {
-        if (!e(this, m)) throw new Error("targetContainer is not found");
+        if (!e(this, a)) throw new Error("targetContainer is not found");
         const t = document.createElement("div");
         t.classList.add(w.scrollmeter_container);
-        const r = e(this, B).call(this, e(this, m));
-        o(this, I, r), t.style.zIndex = r.toString();
-        const i = e(this, M).call(this);
+        const r = e(this, I).call(this, e(this, a));
+        o(this, O, r), t.style.zIndex = r.toString();
+        const i = e(this, A).call(this);
         return t.appendChild(i), o(this, g, t), this.setCSSCustomProperties(), t;
       } catch (t) {
         console.error(t);
       }
-    }), o(this, M, () => {
+    }), o(this, A, () => {
       const t = document.createElement("div");
-      return t.classList.add(w.scrollmeter_bar), o(this, T, t), t;
-    }), o(this, B, (t) => {
+      return t.classList.add(w.scrollmeter_bar), o(this, S, t), t;
+    }), o(this, I, (t) => {
       let r = 0;
       const i = window.getComputedStyle(t).zIndex;
-      return i !== "auto" && (r = Math.max(r, parseInt(i))), Array.from(t.children).forEach((a) => {
-        r = Math.max(r, e(this, B).call(this, a));
+      return i !== "auto" && (r = Math.max(r, parseInt(i))), Array.from(t.children).forEach((m) => {
+        r = Math.max(r, e(this, I).call(this, m));
       }), r + 1;
-    }), o(this, L, () => {
-      if (!e(this, m)) return;
-      if (!e(this, V).call(this)) {
+    }), o(this, B, () => {
+      if (!e(this, a)) return;
+      if (!e(this, Y).call(this)) {
         e(this, g).style.opacity = "0";
         return;
       }
       e(this, g).style.opacity = "1";
-      const i = (window.scrollY - e(this, O)) / e(this, P) * 100;
-      o(this, E, Math.min(100, Math.max(0, i))), e(this, T) && (e(this, T).style.width = `${e(this, E)}%`);
-    }), o(this, V, () => e(this, m) ? e(this, m).getBoundingClientRect().top <= 0 && e(this, m).getBoundingClientRect().bottom > 0 : !1), o(this, q, async () => {
-      if (e(this, m))
+      const i = (window.scrollY - e(this, P)) / e(this, x) * 100;
+      o(this, E, Math.min(100, Math.max(0, i))), e(this, S) && (e(this, S).style.width = `${e(this, E)}%`);
+    }), o(this, Y, () => e(this, a) ? e(this, a).getBoundingClientRect().top < 0 && e(this, a).getBoundingClientRect().bottom > 0 : !1), o(this, F, async () => {
+      if (e(this, a))
         try {
           const t = await K(document.documentElement, {
-            ignoreElements: (r) => [w.scrollmeter_container].some((a) => r.classList.contains(a))
+            ignoreElements: (r) => [w.scrollmeter_container].some((m) => r.classList.contains(m))
           });
-          o(this, x, t);
+          o(this, v, t);
         } catch (t) {
           console.error("미리보기를 생성하는 중 오류가 발생했습니다:", t);
         }
@@ -219,23 +232,23 @@ class fe extends W {
       }
     }, this.createScrollmeter = () => {
       try {
-        if (!e(this, m)) throw new Error("targetContainer is not found");
+        if (!e(this, a)) throw new Error("targetContainer is not found");
         if (document.querySelectorAll(`.${w.scrollmeter_container}`).length > 0)
           return null;
-        if (!e(this, v))
+        if (!e(this, T))
           throw new Error("resizeObserver is not found");
-        const r = e(this, D).call(this);
+        const r = e(this, q).call(this);
         if (!r) throw new Error("scrollmetercontainer is not found");
-        e(this, m).appendChild(r), e(this, v).observe(e(this, m)), window.addEventListener("scroll", e(this, L));
+        e(this, a).appendChild(r), e(this, T).observe(e(this, a)), window.addEventListener("scroll", e(this, B));
       } catch (t) {
         console.error(t);
       }
-    }, this.getTargetContainer = () => e(this, m), this.getScrollmeterContainer = () => e(this, g), this.getCaptureCanvas = () => e(this, x) || null, this.getDefaultOptions = () => e(this, C);
+    }, this.getTargetContainer = () => e(this, a), this.getScrollmeterContainer = () => e(this, g), this.getCaptureCanvas = () => e(this, v) || null, this.getDefaultOptions = () => e(this, C);
     const { targetId: n } = l;
-    o(this, C, l), o(this, m, document.getElementById(n) ?? null), o(this, g, null), o(this, T, null), o(this, v, null), o(this, x, null), o(this, z, []), o(this, b, 0), o(this, E, 0), o(this, P, 0), o(this, O, 0), o(this, I, 0), e(this, k).call(this);
+    o(this, C, l), o(this, a, document.getElementById(n) ?? null), o(this, g, null), o(this, S, null), o(this, T, null), o(this, v, null), o(this, M, []), o(this, b, 0), o(this, E, 0), o(this, x, 0), o(this, P, 0), o(this, O, 0), e(this, V).call(this);
   }
 }
-C = new WeakMap(), m = new WeakMap(), g = new WeakMap(), T = new WeakMap(), v = new WeakMap(), z = new WeakMap(), x = new WeakMap(), b = new WeakMap(), E = new WeakMap(), P = new WeakMap(), O = new WeakMap(), I = new WeakMap(), k = new WeakMap(), D = new WeakMap(), M = new WeakMap(), B = new WeakMap(), L = new WeakMap(), V = new WeakMap(), q = new WeakMap();
+C = new WeakMap(), a = new WeakMap(), g = new WeakMap(), S = new WeakMap(), T = new WeakMap(), M = new WeakMap(), v = new WeakMap(), b = new WeakMap(), E = new WeakMap(), x = new WeakMap(), P = new WeakMap(), O = new WeakMap(), V = new WeakMap(), q = new WeakMap(), A = new WeakMap(), I = new WeakMap(), B = new WeakMap(), Y = new WeakMap(), F = new WeakMap();
 const Se = (c) => {
   new fe(c).createScrollmeter();
 };
