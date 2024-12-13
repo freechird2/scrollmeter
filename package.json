@@ -9,6 +9,7 @@
         "build": "yarn workspaces run build",
         "test": "yarn workspaces run test",
         "build:core": "yarn workspace @scrollmeter/core build",
-        "examples:dev": "yarn workspace examples dev"
+        "examples:dev": "yarn workspace examples dev",
+        "examples:deploy": "cd examples && yarn deploy"
     }
 }
