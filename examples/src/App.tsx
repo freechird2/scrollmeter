@@ -1,56 +1,51 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
 import { createScrollmeter } from '@scrollmeter/core'
 import '@scrollmeter/core/dist/index.css'
+import { ScrollmeterOptions } from '../../core/dist/types/scrollmeter.types'
+import styled from 'styled-components'
 
 function App() {
-    const [count, setCount] = useState(0)
+  const [scrollOptions, setScrollOptions] = useState<ScrollmeterOptions>({
+    targetId: 'target',
+    useTimeline: true,
+    useTooltip: true,
+    usePreview: true,
+  })
 
-    useEffect(() => {
-        createScrollmeter({
-            targetId: 'target',
-            useTimeline: true,
-            useTooltip: true,
-            usePreview: true,
-        })
-    }, [])
+  useEffect(() => {
+    createScrollmeter(scrollOptions)
+  }, [])
 
-    return (
-        <div
-            id='target'
-            style={{ height: '3000px' }}>
-            <div>
-                <a
-                    href='https://vite.dev'
-                    target='_blank'>
-                    <img
-                        src={viteLogo}
-                        className='logo'
-                        alt='Vite logo'
-                    />
-                </a>
-                <a
-                    href='https://react.dev'
-                    target='_blank'>
-                    <img
-                        src={reactLogo}
-                        className='logo react'
-                        alt='React logo'
-                    />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className='card'>
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-        </div>
-    )
+  return (
+    <MainContainer id="target">
+      <Section>
+        <H1>
+          Thank you for using
+          <br />
+          the Scrollmeter
+        </H1>
+      </Section>
+    </MainContainer>
+  )
 }
+
+const MainContainer = styled.div`
+  width: 100%;
+  padding-block: 100px;
+`
+
+const Section = styled.div`
+  max-width: 600px;
+  margin: 0 auto;
+`
+
+const H1 = styled.h1`
+  font-size: 3.2rem;
+  color: rgba(255, 255, 255, 0.87);
+  text-align: center;
+  line-height: 1.2;
+  white-space: pre-wrap;
+`
 
 export default App
