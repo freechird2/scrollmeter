@@ -73,7 +73,7 @@ export class Scrollmeter extends IScrollmeter {
 
                 const timeline = new ScrollmeterTimeline(this)
 
-                this.#timelineElements = timeline.createTimeline(this.#containerHeight, this.#highestZIndex)
+                this.#timelineElements = timeline.createTimeline(this.#highestZIndex)
             }
         })
     }
@@ -151,7 +151,7 @@ export class Scrollmeter extends IScrollmeter {
     #isVisibleScrollmeter = () => {
         if (!this.#targetContainer) return false
 
-        return this.#targetContainer.getBoundingClientRect().top <= 0 && this.#targetContainer.getBoundingClientRect().bottom > 0
+        return this.#targetContainer.getBoundingClientRect().top < 0 && this.#targetContainer.getBoundingClientRect().bottom > 0
     }
 
     #captureContainer = async () => {
