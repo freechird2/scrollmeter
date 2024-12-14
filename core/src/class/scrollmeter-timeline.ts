@@ -1,7 +1,7 @@
+import styles from '../styles/scrollmeter.module.scss'
 import { IScrollmeter } from '../types/scrollmeter.types'
 import { Scrollmeter } from './scrollmeter'
 import { ScrollmeterTooltip } from './scrollmeter-tooltip'
-import styles from '../styles/scrollmeter.module.scss'
 
 export class ScrollmeterTimeline extends IScrollmeter {
     #scrollmeter: Scrollmeter
@@ -51,15 +51,17 @@ export class ScrollmeterTimeline extends IScrollmeter {
         return true
     }
 
-    public createTimeline = (highestZIndex: number): HTMLElement[] => {
+    public createTimeline = (highestZIndex: number): ScrollmeterTimeline => {
         const targetContainer = this.#scrollmeter.getTargetContainer()
-        if (!targetContainer) return []
+        if (!targetContainer) return null
 
         const targetElement = this.#findTimelineElements(targetContainer)
 
-        if (targetElement.length === 0) return []
+        if (targetElement.length === 0) return null
 
         const timelineElements: HTMLElement[] = []
+        const timelineWidth = this.#scrollmeter.getDefaultOptions().timelineOptions?.width ?? 4
+        let outOfBoundIndex = targetElement.length
 
         targetElement.map((element) => {
             const scrollContainer = this.#scrollmeter.getTargetContainer()
@@ -74,48 +76,42 @@ export class ScrollmeterTimeline extends IScrollmeter {
             const relativeTargetTop = absoluteElementTop - absoluteContainerTop
             const scrollableHeight = scrollContainer.clientHeight - document.documentElement.clientHeight
 
+            timelineElement.style.zIndex = highestZIndex.toString()
+
+            timelineElement.addEventListener('click', () => {
+                element.scrollIntoView({ behavior: 'smooth' })
+            })
+
             if (scrollableHeight > absoluteElementTop) {
                 const relativePosition = (relativeTargetTop / scrollableHeight) * 100
 
-                console.log(
-                    scrollContainer.clientHeight,
-                    document.documentElement.clientHeight,
-                    scrollContainer.clientHeight - document.documentElement.clientHeight,
-                    absoluteElementTop,
-                    absoluteContainerTop,
-                    relativeTargetTop,
-                    relativePosition
-                )
-                const width = this.#scrollmeter.getDefaultOptions().timelineOptions?.width ?? 4
-
-                timelineElement.style.left = `${relativePosition > 100 ? `calc(100% - ${width}px)` : `${relativePosition}%`}`
-                timelineElement.style.zIndex = highestZIndex.toString()
-
-                timelineElement.addEventListener('click', () => {
-                    element.scrollIntoView({ behavior: 'smooth' })
-                })
+                timelineElement.style.left = `${relativePosition > 100 ? `calc(100% - ${timelineWidth}px)` : `${relativePosition}%`}`
 
                 if (this.#scrollmeter.getDefaultOptions().useTooltip) {
                     const tooltip = new ScrollmeterTooltip(this.#scrollmeter)
 
-                    tooltip.createTimelineTooltip(
-                        timelineElement,
-                        element,
-                        relativePosition < 7.6 ? 'left' : relativePosition > 92.4 ? 'right' : 'center'
-                    )
+                    tooltip.createTimelineTooltip(timelineElement, element, relativePosition < 7.6 ? 'left' : 'center')
                 }
+            } else {
+                timelineElement.style.left = `calc(100% - ${timelineWidth * (outOfBoundIndex-- * 4)}px)`
 
-                this.#scrollmeter.getScrollmeterContainer()?.appendChild(timelineElement)
-                timelineElements.push(timelineElement)
+                if (this.#scrollmeter.getDefaultOptions().useTooltip) {
+                    const tooltip = new ScrollmeterTooltip(this.#scrollmeter)
+
+                    tooltip.createTimelineTooltip(timelineElement, element, 'right')
+                }
             }
+
+            this.#scrollmeter.getScrollmeterContainer()?.appendChild(timelineElement)
+            timelineElements.push(timelineElement)
         })
 
         this.setCSSCustomProperties()
 
-        return timelineElements
+        return this
     }
 
-    protected setCSSCustomProperties() {
+    public setCSSCustomProperties() {
         const defaultOptions = this.#scrollmeter.getDefaultOptions()
         // css custom
         if (defaultOptions && defaultOptions.timelineOptions) {
