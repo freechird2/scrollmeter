@@ -22,6 +22,7 @@
     top: 0;
     background-color: var(--scrollmeter-bar-background);
     transition: opacity 0.2s ease-out;
+    opacity: 0;
 
     .scrollmeter_bar {
         width: 0;
@@ -59,7 +60,7 @@
         top: calc(var(--scrollmeter-bar-height) + 16px);
         padding-block: var(--scrollmeter-tooltip-padding-block);
         padding-inline: var(--scrollmeter-tooltip-padding-inline);
-        max-width: var(--scrollmeter-tooltip-width);
+        width: var(--scrollmeter-tooltip-width);
         background-color: var(--scrollmeter-tooltip-background);
         color: var(--scrollmeter-tooltip-font-color);
         transition: opacity 0.2s ease-out;
@@ -68,6 +69,7 @@
         > p {
             width: 100%;
             margin: 0;
+            padding-block: 4px 2px;
             font-size: var(--scrollmeter-tooltip-font-size);
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -116,7 +118,7 @@
         }
 
         .scrollmeter_timeline_preview {
-            width: calc(var(--scrollmeter-tooltip-width) - (var(--scrollmeter-tooltip-padding-block) * 2));
+            width: 100%;
             aspect-ratio: 16/9;
 
             > img {

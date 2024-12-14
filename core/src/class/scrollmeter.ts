@@ -1,6 +1,6 @@
 import html2canvas from 'html2canvas'
-import { IScrollmeter, ScrollmeterOptions } from '../types/scrollmeter.types'
 import styles from '../styles/scrollmeter.module.scss'
+import { IScrollmeter, ScrollmeterOptions } from '../types/scrollmeter.types'
 import { ScrollmeterTimeline } from './scrollmeter-timeline'
 
 export class Scrollmeter extends IScrollmeter {
@@ -10,7 +10,7 @@ export class Scrollmeter extends IScrollmeter {
     #scrollmeterBar: HTMLDivElement | null
     #resizeObserver: ResizeObserver | null
 
-    #timelineElements: HTMLElement[]
+    #timelineElements: ScrollmeterTimeline | null
 
     #captureCanvas: HTMLCanvasElement | null
 
@@ -30,8 +30,7 @@ export class Scrollmeter extends IScrollmeter {
         this.#scrollmeterBar = null
         this.#resizeObserver = null
         this.#captureCanvas = null
-
-        this.#timelineElements = []
+        this.#timelineElements = null
 
         // 숫자 필드 초기화
         this.#containerHeight = 0
@@ -41,6 +40,8 @@ export class Scrollmeter extends IScrollmeter {
         this.#highestZIndex = 0
 
         this.#initResizeObserver()
+
+        this.#createScrollmeter()
     }
 
     #initResizeObserver = () => {
@@ -151,7 +152,7 @@ export class Scrollmeter extends IScrollmeter {
     #isVisibleScrollmeter = () => {
         if (!this.#targetContainer) return false
 
-        return this.#targetContainer.getBoundingClientRect().top < 0 && this.#targetContainer.getBoundingClientRect().bottom > 0
+        return this.#targetContainer.getBoundingClientRect().top <= 0 && this.#targetContainer.getBoundingClientRect().bottom > 0
     }
 
     #captureContainer = async () => {
@@ -171,24 +172,7 @@ export class Scrollmeter extends IScrollmeter {
         }
     }
 
-    protected setCSSCustomProperties = () => {
-        if (!this.#scrollmeterContainer) return
-        // css custom
-        if (this.#defaultOptions.barOptions) {
-            const { color, background, height } = this.#defaultOptions.barOptions
-            if (color) {
-                this.#scrollmeterContainer.style.setProperty('--scrollmeter-bar-color', color)
-            }
-            if (background) {
-                this.#scrollmeterContainer.style.setProperty('--scrollmeter-bar-background', background)
-            }
-            if (height) {
-                this.#scrollmeterContainer.style.setProperty('--scrollmeter-bar-height', `${height}px`)
-            }
-        }
-    }
-
-    public createScrollmeter = () => {
+    #createScrollmeter = () => {
         try {
             if (!this.#targetContainer) throw new Error('targetContainer is not found')
 
@@ -216,6 +200,23 @@ export class Scrollmeter extends IScrollmeter {
         }
     }
 
+    protected setCSSCustomProperties = () => {
+        if (!this.#scrollmeterContainer) return
+        // css custom
+        if (this.#defaultOptions.barOptions) {
+            const { color, background, height } = this.#defaultOptions.barOptions
+            if (color) {
+                this.#scrollmeterContainer.style.setProperty('--scrollmeter-bar-color', color)
+            }
+            if (background) {
+                this.#scrollmeterContainer.style.setProperty('--scrollmeter-bar-background', background)
+            }
+            if (height) {
+                this.#scrollmeterContainer.style.setProperty('--scrollmeter-bar-height', `${height}px`)
+            }
+        }
+    }
+
     public getTargetContainer = () => {
         return this.#targetContainer
     }
@@ -230,5 +231,37 @@ export class Scrollmeter extends IScrollmeter {
 
     public getDefaultOptions = () => {
         return this.#defaultOptions
+    }
+
+    public updateScrollmeterStyle = (options: ScrollmeterOptions) => {
+        this.#defaultOptions = options
+
+        this.setCSSCustomProperties()
+
+        this.#timelineElements?.setCSSCustomProperties()
+
+        // css custom
+        if (this.#defaultOptions && this.#defaultOptions.tooltipOptions) {
+            const { background, fontColor, fontSize, paddingBlock, paddingInline, width } = this.#defaultOptions.tooltipOptions
+
+            if (background) {
+                this.#scrollmeterContainer.style.setProperty('--scrollmeter-tooltip-background', background)
+            }
+            if (fontColor) {
+                this.#scrollmeterContainer.style.setProperty('--scrollmeter-tooltip-font-color', fontColor)
+            }
+            if (fontSize) {
+                this.#scrollmeterContainer.style.setProperty('--scrollmeter-tooltip-font-size', `${fontSize}px`)
+            }
+            if (paddingBlock) {
+                this.#scrollmeterContainer.style.setProperty('--scrollmeter-tooltip-padding-block', `${paddingBlock}px`)
+            }
+            if (paddingInline) {
+                this.#scrollmeterContainer.style.setProperty('--scrollmeter-tooltip-padding-inline', `${paddingInline}px`)
+            }
+            if (width) {
+                this.#scrollmeterContainer.style.setProperty('--scrollmeter-tooltip-width', `${width}px`)
+            }
+        }
     }
 }

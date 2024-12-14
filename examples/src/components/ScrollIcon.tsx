@@ -2,17 +2,20 @@ import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 
 const ScrollIcon = () => {
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!isVisible) return
-
-      window.removeEventListener('scroll', handleScroll)
-      setIsVisible(false)
+      if (window.scrollY > 0) {
+        window.removeEventListener('scroll', handleScroll)
+        setIsVisible(false)
+      }
     }
 
-    if (window.scrollY === 0) window.addEventListener('scroll', handleScroll)
+    if (window.scrollY === 0) {
+      window.addEventListener('scroll', handleScroll)
+      setIsVisible(true)
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
