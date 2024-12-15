@@ -1,6 +1,6 @@
+import styles from '../styles/scrollmeter.module.scss'
 import { IScrollmeter } from '../types/scrollmeter.types'
 import { Scrollmeter } from './scrollmeter'
-import styles from '../styles/scrollmeter.module.scss'
 
 export class ScrollmeterTooltip extends IScrollmeter {
     #scrollmeter: Scrollmeter
@@ -12,6 +12,7 @@ export class ScrollmeterTooltip extends IScrollmeter {
 
     #cropImageAtPercent = (targetElement: HTMLElement, cropWidth: number = 320) => {
         const captureCanvas = this.#scrollmeter.getCaptureCanvas()
+
         if (!captureCanvas) return
 
         const canvasWidth = captureCanvas.width
