@@ -5,6 +5,8 @@
 
 Scrollmeter는 웹 페이지의 스크롤 진행률을 시각적으로 표시해주는 가벼운 JavaScript 라이브러리입니다.
 
+![Scrollmeter 데모](./assets/demo.gif)
+
 ## ✨ 주요 기능
 
 - 🎯 직관적인 프로그레스 바로 스크롤 진행 상황 표시
