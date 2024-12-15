@@ -87,6 +87,70 @@ function App() {
 
 ## 🎨 스타일 커스터마이징
 
+### javascript
+
+```
+import { createScrollmeter } from '@scrollmeter/core';
+import '@scrollmeter/core/dist/index.css';
+
+window.onload = function() {
+    let scrollOptions = {
+        targetId: "container_id_to_measure",
+        useTimeline: true,
+        useTooltip: true,
+        usePreview: true,
+    }
+
+    const scrollmeter = createScrollmeter(scrollOptions);
+
+    scrollOptions = {
+        ...scrollOptions,
+        barOptions: {
+            color: '#4A90E2',
+            height: 10,
+            background: 'transparent',
+        },
+    }
+
+    scrollmeter.updateScrollmeterStyle(scrollOptions);
+}
+```
+
+### React
+
+```
+import { useEffect } from 'react';
+import { createScrollmeter } from '@scrollmeter/core';
+import '@scrollmeter/core/dist/index.css';
+
+function App() {
+    const scrollmeter = useRef<ReturnType<typeof createScrollmeter> | null>(null);
+    const [scrollOptions, setScrollOptions] = useState<ScrollmeterOptions>({
+        targetId: 'container_id_to_measure',
+        useTimeline: true,
+        useTooltip: true,
+        usePreview: true,
+    });
+
+    useEffect(() => {
+        if (scrollmeter.current) return;
+        scrollmeter.current = createScrollmeter(scrollOptions);
+    }, []);
+
+    useEffect(() => {
+        if (scrollmeter.current) {
+            scrollmeter.current.updateScrollmeterStyle(scrollOptions);
+        }
+    }, [scrollOptions]);
+
+    return (
+        <div id="container_id_to_measure">
+            {/* Content you want to measure scroll for */}
+        </div>
+    );
+}
+```
+
 ### barOptions
 
 | 속성       | 타입   | 설명                 | 기본값                  |
