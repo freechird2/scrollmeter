@@ -1,4 +1,4 @@
-import html2canvas from 'html2canvas'
+import * as htmlToImage from 'html-to-image'
 import styles from '../styles/scrollmeter.module.scss'
 import { IScrollmeter, ScrollmeterOptions } from '../types/scrollmeter.types'
 import { ScrollmeterTimeline } from './scrollmeter-timeline'
@@ -20,6 +20,8 @@ export class Scrollmeter extends IScrollmeter {
     #elementTop: number
     #highestZIndex: number
 
+    #isInView: boolean
+
     constructor(options: ScrollmeterOptions) {
         super()
         const { targetId } = options
@@ -38,6 +40,8 @@ export class Scrollmeter extends IScrollmeter {
         this.#totalHeight = 0
         this.#elementTop = 0
         this.#highestZIndex = 0
+
+        this.#isInView = false
 
         this.#initResizeObserver()
 
@@ -129,7 +133,10 @@ export class Scrollmeter extends IScrollmeter {
     }
 
     #updateBarWidth = () => {
+        console.log('scroll')
         if (!this.#targetContainer) return
+        if (!this.#isInView) return
+
         const isVisibleScrollmeter = this.#isVisibleScrollmeter()
 
         if (!isVisibleScrollmeter) {
@@ -149,6 +156,22 @@ export class Scrollmeter extends IScrollmeter {
         }
     }
 
+    #throttle = (func: Function, limit: number) => {
+        let inThrottle: boolean = false
+
+        return () => {
+            if (!inThrottle) {
+                func.apply(this)
+                inThrottle = true
+                setTimeout(() => {
+                    inThrottle = false
+                }, limit)
+            }
+        }
+    }
+
+    #throttledUpdateBarWidth = this.#throttle(this.#updateBarWidth, 16)
+
     #isVisibleScrollmeter = () => {
         if (!this.#targetContainer) return false
 
@@ -159,16 +182,36 @@ export class Scrollmeter extends IScrollmeter {
         if (!this.#targetContainer) return
 
         try {
-            const canvas = await html2canvas(document.documentElement, {
-                ignoreElements: (element) => {
-                    const ignoreClasses = [styles.scrollmeter_container]
-                    return ignoreClasses.some((className) => element.classList.contains(className))
+            // 전체 문서 크기 계산
+            const docWidth = Math.max(
+                document.documentElement.scrollWidth,
+                document.documentElement.offsetWidth,
+                document.documentElement.clientWidth
+            )
+            const docHeight = Math.max(
+                document.documentElement.scrollHeight,
+                document.documentElement.offsetHeight,
+                document.documentElement.clientHeight
+            )
+
+            // DOM 업데이트를 위한 대기
+            await new Promise((resolve) => setTimeout(resolve, 100))
+
+            const canvas = await htmlToImage.toCanvas(document.documentElement, {
+                width: docWidth,
+                height: docHeight,
+                filter: (node) => {
+                    return !(node instanceof HTMLElement && node.classList?.contains(styles.scrollmeter_container))
                 },
+                backgroundColor: getComputedStyle(document.body).backgroundColor || '#ffffff',
             })
 
             this.#captureCanvas = canvas
+
+            return canvas
         } catch (error) {
-            console.error('미리보기를 생성하는 중 오류가 발생했습니다:', error)
+            console.error('미리보기 생성 중 오류 발생:', error)
+            return null
         }
     }
 
@@ -194,7 +237,20 @@ export class Scrollmeter extends IScrollmeter {
 
             this.#resizeObserver.observe(this.#targetContainer)
 
-            window.addEventListener('scroll', this.#updateBarWidth)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        this.#isInView = true
+                        this.#updateBarWidth()
+                    } else {
+                        this.#isInView = false
+                    }
+                })
+            })
+
+            observer.observe(this.#targetContainer)
+
+            window.addEventListener('scroll', this.#throttledUpdateBarWidth)
         } catch (error) {
             console.error(error)
         }
