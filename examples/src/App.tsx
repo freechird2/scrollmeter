@@ -16,7 +16,7 @@ function App() {
     barOptions: {
       color: 'rgba(74, 144, 226, 0.9)',
       height: 10,
-      background: 'transparent',
+      background: 'rgba(0, 0, 0, 0)',
     },
     timelineOptions: {
       color: '#838383',

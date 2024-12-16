@@ -133,7 +133,6 @@ export class Scrollmeter extends IScrollmeter {
     }
 
     #updateBarWidth = () => {
-        console.log('scroll')
         if (!this.#targetContainer) return
         if (!this.#isInView) return
 

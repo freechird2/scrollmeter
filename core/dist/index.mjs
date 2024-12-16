@@ -644,7 +644,7 @@ class Ae extends lt {
         o = Math.max(o, l(this, D).call(this, c));
       }), o + 1;
     }), u(this, v, () => {
-      if (console.log("scroll"), !l(this, d) || !l(this, R)) return;
+      if (!l(this, d) || !l(this, R)) return;
       if (!l(this, j).call(this)) {
         l(this, p).style.opacity = "0";
         return;
