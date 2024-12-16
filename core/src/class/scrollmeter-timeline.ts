@@ -82,6 +82,23 @@ export class ScrollmeterTimeline extends IScrollmeter {
                 element.scrollIntoView({ behavior: 'smooth' })
             })
 
+            timelineElement.addEventListener('touchstart', function () {
+                const tooltip = this.querySelector(`.${styles.scrollmeter_timeline_tooltip}`) as HTMLDivElement
+
+                if (tooltip) {
+                    tooltip.style.visibility = 'visible'
+                    tooltip.style.opacity = '1'
+                }
+            })
+
+            timelineElement.addEventListener('touchend', function () {
+                const tooltip = this.querySelector(`.${styles.scrollmeter_timeline_tooltip}`) as HTMLDivElement
+                if (tooltip) {
+                    tooltip.style.visibility = 'hidden'
+                    tooltip.style.opacity = '0'
+                }
+            })
+
             if (scrollableHeight > absoluteElementTop) {
                 const relativePosition = (relativeTargetTop / scrollableHeight) * 100
 
