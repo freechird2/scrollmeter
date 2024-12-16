@@ -78,7 +78,7 @@ export class ScrollmeterTimeline extends IScrollmeter {
 
             timelineElement.style.zIndex = highestZIndex.toString()
 
-            timelineElement.addEventListener('click', () => {
+            timelineElement.addEventListener('pointerdown', () => {
                 element.scrollIntoView({ behavior: 'smooth' })
             })
 
