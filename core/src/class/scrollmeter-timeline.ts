@@ -82,23 +82,6 @@ export class ScrollmeterTimeline extends IScrollmeter {
                 element.scrollIntoView({ behavior: 'smooth' })
             })
 
-            timelineElement.addEventListener('touchstart', function () {
-                const tooltip = this.querySelector(`.${styles.scrollmeter_timeline_tooltip}`) as HTMLDivElement
-
-                if (tooltip) {
-                    tooltip.style.visibility = 'visible'
-                    tooltip.style.opacity = '1'
-                }
-            })
-
-            timelineElement.addEventListener('touchend', function () {
-                const tooltip = this.querySelector(`.${styles.scrollmeter_timeline_tooltip}`) as HTMLDivElement
-                if (tooltip) {
-                    tooltip.style.visibility = 'hidden'
-                    tooltip.style.opacity = '0'
-                }
-            })
-
             if (scrollableHeight > absoluteElementTop) {
                 const relativePosition = (relativeTargetTop / scrollableHeight) * 100
 
@@ -107,7 +90,11 @@ export class ScrollmeterTimeline extends IScrollmeter {
                 if (this.#scrollmeter.getDefaultOptions().useTooltip) {
                     const tooltip = new ScrollmeterTooltip(this.#scrollmeter)
 
-                    tooltip.createTimelineTooltip(timelineElement, element, relativePosition < 7.6 ? 'left' : 'center')
+                    tooltip.createTimelineTooltip(
+                        timelineElement,
+                        element,
+                        relativePosition <= 16 ? 'left' : relativePosition >= 83 ? 'right' : 'center'
+                    )
                 }
             } else {
                 timelineElement.style.left = `calc(100% - ${timelineWidth * (outOfBoundIndex-- * 4)}px)`
@@ -115,7 +102,17 @@ export class ScrollmeterTimeline extends IScrollmeter {
                 if (this.#scrollmeter.getDefaultOptions().useTooltip) {
                     const tooltip = new ScrollmeterTooltip(this.#scrollmeter)
 
-                    tooltip.createTimelineTooltip(timelineElement, element, 'right')
+                    const tooltipElement = tooltip.createTimelineTooltip(timelineElement, element, 'right')
+
+                    tooltipElement.addEventListener('touchstart', function () {
+                        tooltipElement.style.visibility = 'visible'
+                        tooltipElement.style.opacity = '1'
+
+                        setTimeout(() => {
+                            tooltipElement.style.visibility = 'hidden'
+                            tooltipElement.style.opacity = '0'
+                        }, 1000)
+                    })
                 }
             }
 
