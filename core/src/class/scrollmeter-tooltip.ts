@@ -12,12 +12,13 @@ export class ScrollmeterTooltip extends IScrollmeter {
 
     #cropImageAtPercent = (targetElement: HTMLElement, cropWidth: number = 320) => {
         const captureCanvas = this.#scrollmeter.getCaptureCanvas()
+        const ratio = this.#scrollmeter.getCanvasRatio()
 
         if (!captureCanvas) return
 
         const canvasWidth = captureCanvas.width
         const canvasHeight = (canvasWidth * 9) / 16 // 16:9 비율 계산
-        const y = Math.max(0, targetElement.getBoundingClientRect().top + window.scrollY - canvasHeight / 2)
+        const y = Math.max(0, targetElement.getBoundingClientRect().top * ratio + window.scrollY * ratio - canvasHeight / 2)
 
         const cropHeight = (cropWidth * 9) / 16 // 16:9 비율 계산
 
@@ -84,6 +85,8 @@ export class ScrollmeterTooltip extends IScrollmeter {
         this.setCSSCustomProperties()
 
         timelineElement.appendChild(timelineTooltip)
+
+        return timelineTooltip
     }
 
     protected setCSSCustomProperties() {

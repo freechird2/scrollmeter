@@ -6,6 +6,7 @@ export declare class Scrollmeter extends IScrollmeter {
     getTargetContainer: () => HTMLElement;
     getScrollmeterContainer: () => HTMLDivElement;
     getCaptureCanvas: () => HTMLCanvasElement;
+    getCanvasRatio: () => number;
     getDefaultOptions: () => ScrollmeterOptions;
     updateScrollmeterStyle: (options: ScrollmeterOptions) => void;
 }

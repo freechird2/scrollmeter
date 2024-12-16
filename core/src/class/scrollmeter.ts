@@ -20,6 +20,9 @@ export class Scrollmeter extends IScrollmeter {
     #elementTop: number
     #highestZIndex: number
 
+    #docWidth: number
+    #canvasWidth: number
+
     #isInView: boolean
 
     constructor(options: ScrollmeterOptions) {
@@ -40,6 +43,8 @@ export class Scrollmeter extends IScrollmeter {
         this.#totalHeight = 0
         this.#elementTop = 0
         this.#highestZIndex = 0
+        this.#docWidth = 0
+        this.#canvasWidth = 0
 
         this.#isInView = false
 
@@ -227,6 +232,9 @@ export class Scrollmeter extends IScrollmeter {
                 backgroundColor: getComputedStyle(document.body).backgroundColor || '#ffffff',
             })
 
+            this.#docWidth = docWidth
+            this.#canvasWidth = canvas.width
+
             this.#captureCanvas = canvas
 
             return canvas
@@ -304,6 +312,10 @@ export class Scrollmeter extends IScrollmeter {
 
     public getCaptureCanvas = () => {
         return this.#captureCanvas || null
+    }
+
+    public getCanvasRatio = () => {
+        return this.#canvasWidth / this.#docWidth
     }
 
     public getDefaultOptions = () => {
