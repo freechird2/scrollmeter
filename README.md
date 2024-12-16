@@ -110,7 +110,7 @@ window.onload = function() {
         barOptions: {
             color: '#4A90E2',
             height: 10,
-            background: 'transparent',
+            background: 'rgba(0, 0, 0, 0)',
         },
     }
 
@@ -159,7 +159,7 @@ function App() {
 | ---------- | ------ | -------------------- | ----------------------- |
 | color      | string | 프로그레스 바 색상   | rgba(74, 144, 226, 0.9) |
 | height     | number | 프로그레스 바 높이   | 10                      |
-| background | string | 프로그레스 바 배경색 | transparent             |
+| background | string | 프로그레스 바 배경색 | rgba(0, 0, 0, 0)        |
 
 ### timelineOptions
 

@@ -73,12 +73,12 @@ export class Scrollmeter extends IScrollmeter {
                 })
 
                 if (this.#defaultOptions.usePreview) {
-                    await this.#captureContainer()
+                    this.#debouncedCaptureContainer()
+                } else {
+                    const timeline = new ScrollmeterTimeline(this)
+
+                    this.#timelineElements = timeline.createTimeline(this.#highestZIndex)
                 }
-
-                const timeline = new ScrollmeterTimeline(this)
-
-                this.#timelineElements = timeline.createTimeline(this.#highestZIndex)
             }
         })
     }
@@ -176,6 +176,28 @@ export class Scrollmeter extends IScrollmeter {
 
         return this.#targetContainer.getBoundingClientRect().top <= 0 && this.#targetContainer.getBoundingClientRect().bottom > 0
     }
+
+    #debounce = (func: Function, wait: number) => {
+        let timeout: ReturnType<typeof setTimeout> | null = null
+
+        return (...args: any[]) => {
+            if (timeout) clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                func.apply(this, args)
+                timeout = null
+            }, wait)
+        }
+    }
+
+    #debouncedCaptureContainer = this.#debounce(async () => {
+        if (this.#defaultOptions.usePreview) {
+            await this.#captureContainer()
+
+            const timeline = new ScrollmeterTimeline(this)
+
+            this.#timelineElements = timeline.createTimeline(this.#highestZIndex)
+        }
+    }, 300)
 
     #captureContainer = async () => {
         if (!this.#targetContainer) return

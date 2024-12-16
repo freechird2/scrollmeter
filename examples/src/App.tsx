@@ -6,6 +6,12 @@ import styled from 'styled-components'
 import type { ScrollmeterOptions } from '../../core/dist/types/scrollmeter.types'
 import ScrollIcon from './components/ScrollIcon'
 
+const breakpoints = {
+  mobile: '320px',
+  tablet: '768px',
+  desktop: '1024px',
+}
+
 function App() {
   const scrollmeter = useRef<ReturnType<typeof createScrollmeter> | null>(null)
   const [scrollOptions, setScrollOptions] = useState<ScrollmeterOptions>({
@@ -230,7 +236,7 @@ window.onload = function() {
         barOptions: {
             color: '#4A90E2',
             height: 10,
-            background: 'transparent',
+            background: 'rgba(0, 0, 0, 0)',
         },
     }
 
@@ -316,7 +322,7 @@ function App() {
                 <td>
                   <input
                     type="color"
-                    defaultValue="transparent"
+                    defaultValue="#000000"
                     onChange={(e) =>
                       updateScrollbarOptions('background', e.target.value)
                     }
@@ -512,6 +518,13 @@ const MainContainer = styled.div`
   width: 100%;
   min-width: 600px;
   padding-block: 100px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 100%;
+    min-width: 100%;
+    padding-block: 50px;
+    padding-inline: 20px;
+  }
 `
 
 const Section = styled.div`
@@ -520,6 +533,10 @@ const Section = styled.div`
 
   & + & {
     margin-top: 100px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 100%;
   }
 `
 
@@ -557,6 +574,10 @@ const Ul = styled.ul`
     color: rgba(255, 255, 255, 0.87);
     line-height: 1.5;
     word-break: keep-all;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      margin-left: 20px;
+    }
   }
 
   li + li {
@@ -588,8 +609,8 @@ const Code = styled.div<{ $isExpanded?: boolean }>`
     height: 50px;
     background: ${({ $isExpanded }) =>
       $isExpanded
-        ? 'transparent'
-        : 'linear-gradient(to bottom, transparent, #151b23)'};
+        ? 'rgba(0, 0, 0, 0)'
+        : 'linear-gradient(to bottom, rgba(0, 0, 0, 0), #151b23)'};
     pointer-events: none;
   }
 `
@@ -676,6 +697,10 @@ const Table = styled.table`
   td:nth-child(4) {
     width: 150px;
     text-align: center;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 100px;
+    }
   }
 
   input {
