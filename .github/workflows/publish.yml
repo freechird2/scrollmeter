@@ -5,6 +5,14 @@ on:
         branches:
             - main
 
+permissions:
+    contents: write
+    packages: write
+    pull-requests: write
+    actions: write
+    deployments: write
+    statuses: write
+
 jobs:
     publish:
         runs-on: ubuntu-latest
