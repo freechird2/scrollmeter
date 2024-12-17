@@ -122,7 +122,7 @@ window.onload = function() {
 
 ```
 import { useEffect } from 'react';
-import { createScrollmeter } from '@scrollmeter/core';
+import { createScrollmeter, ScrollmeterOptions } from '@scrollmeter/core'
 import '@scrollmeter/core/dist/index.css';
 
 function App() {
@@ -187,4 +187,4 @@ function App() {
 
 MIT License
 
-Copyright (c) 2024 freechird2
+Copyright (c) 2024 suhyeon.jeon
