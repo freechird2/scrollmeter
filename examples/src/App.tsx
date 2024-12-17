@@ -5,6 +5,10 @@ import '@scrollmeter/core/dist/index.css'
 import styled from 'styled-components'
 import type { ScrollmeterOptions } from '../../core/dist/types/scrollmeter.types'
 import ScrollIcon from './components/ScrollIcon'
+// import ScrollIcon from './components/ScrollIcon'
+// import { createScrollmeter } from '@scrollmeter/core'
+// import { ScrollmeterOptions } from '@scrollmeter/core'
+// import '@scrollmeter/core/dist/index.css'
 
 const breakpoints = {
   mobile: '320px',
@@ -589,7 +593,7 @@ const Code = styled.div<{ $isExpanded?: boolean }>`
   width: 100%;
   background-color: #151b23;
   padding: 16px;
-  font-family: 'Elice Digital Coding', 'monospace';
+  font-family: 'monospace';
   font-size: 1.6rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.87);
@@ -693,7 +697,7 @@ const Table = styled.table`
     width: 45%;
   }
 
-  // 새로�� 테스트 컬럼 스타일
+  // 새로 테스트 컬럼 스타일
   th:nth-child(4),
   td:nth-child(4) {
     width: 130px;

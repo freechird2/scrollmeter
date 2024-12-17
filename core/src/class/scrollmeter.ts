@@ -174,7 +174,7 @@ export class Scrollmeter extends IScrollmeter {
         }
     }
 
-    #throttledUpdateBarWidth = this.#throttle(this.#updateBarWidth, 16)
+    #throttledUpdateBarWidth = this.#throttle(this.#updateBarWidth, 8)
 
     #isVisibleScrollmeter = () => {
         if (!this.#targetContainer) return false
