@@ -559,10 +559,10 @@ class Tt extends mt {
             V <= 16 ? "left" : V >= 83 ? "right" : "center"
           );
         } else if (m.style.left = `calc(100% - ${s * (c-- * 4)}px)`, l(this, y).getDefaultOptions().useTooltip) {
-          const I = new xt(l(this, y)).createTimelineTooltip(m, f, "right");
-          I.addEventListener("touchstart", function() {
-            I.style.visibility = "visible", I.style.opacity = "1", setTimeout(() => {
-              I.style.visibility = "hidden", I.style.opacity = "0";
+          const H = new xt(l(this, y)).createTimelineTooltip(m, f, "right");
+          H.addEventListener("touchstart", function() {
+            H.style.visibility = "visible", H.style.opacity = "1", setTimeout(() => {
+              H.style.visibility = "hidden", H.style.opacity = "0";
             }, 1e3);
           });
         }
@@ -590,7 +590,7 @@ y = new WeakMap(), z = new WeakMap(), ot = new WeakSet(), Ot = function(n) {
   }
   return !0;
 };
-var _, d, p, T, P, R, O, H, k, A, D, v, F, B, $, q, j, G, M, L, X, Y, J, Z, K, Q, N;
+var _, d, p, T, P, R, k, A, D, v, $, L, F, B, I, q, j, G, M, O, X, Y, J, Z, K, Q, N;
 class Ve extends mt {
   constructor(n) {
     super();
@@ -600,20 +600,20 @@ class Ve extends mt {
     h(this, T);
     h(this, P);
     h(this, R);
-    h(this, O);
-    h(this, H);
     h(this, k);
     h(this, A);
     h(this, D);
     h(this, v);
+    h(this, $);
+    h(this, L);
     h(this, F);
     h(this, B);
-    h(this, $);
+    h(this, I);
     h(this, q);
     h(this, j);
     h(this, G);
     h(this, M);
-    h(this, L);
+    h(this, O);
     h(this, X);
     h(this, Y);
     h(this, J);
@@ -625,17 +625,17 @@ class Ve extends mt {
       if (!l(this, d))
         throw new Error("targetContainer is not found");
       u(this, P, new ResizeObserver(async (r) => {
-        if (!l(this, d) || !l(this, p) || l(this, H) === r[0].contentRect.height) return;
-        u(this, H, r[0].contentRect.height);
+        if (!l(this, d) || !l(this, p) || l(this, A) === r[0].contentRect.height) return;
+        u(this, A, r[0].contentRect.height);
         const o = parseInt(window.getComputedStyle(l(this, d)).marginTop), s = parseInt(window.getComputedStyle(l(this, d)).marginBottom);
-        if (u(this, D, window.scrollY + l(this, d).getBoundingClientRect().top), u(this, A, l(this, d).clientHeight + o + s - document.documentElement.clientHeight), l(this, L).call(this), l(this, _).useTimeline)
+        if (u(this, $, window.scrollY + l(this, d).getBoundingClientRect().top), u(this, v, l(this, d).clientHeight + o + s - document.documentElement.clientHeight), l(this, O).call(this), l(this, _).useTimeline)
           if (document.querySelectorAll(`.${E.scrollmeter_timeline}`).forEach((c) => {
             c.remove();
           }), l(this, _).usePreview)
             l(this, K).call(this);
           else {
             const c = new Tt(this);
-            u(this, R, c.createTimeline(l(this, v)));
+            u(this, R, c.createTimeline(l(this, L)));
           }
       }));
     }), u(this, j, () => {
@@ -644,7 +644,7 @@ class Ve extends mt {
         const r = document.createElement("div");
         r.classList.add(E.scrollmeter_container);
         const o = l(this, M).call(this, l(this, d));
-        u(this, v, o), r.style.zIndex = o.toString();
+        u(this, L, o), r.style.zIndex = o.toString();
         const s = l(this, G).call(this);
         return r.appendChild(s), u(this, p, r), this.setCSSCustomProperties(), r;
       } catch (r) {
@@ -659,15 +659,15 @@ class Ve extends mt {
       return s !== "auto" && (o = Math.max(o, parseInt(s))), Array.from(r.children).forEach((c) => {
         o = Math.max(o, l(this, M).call(this, c));
       }), o + 1;
-    }), u(this, L, () => {
-      if (!l(this, d) || !l(this, $)) return;
+    }), u(this, O, () => {
+      if (!l(this, d) || !l(this, I)) return;
       if (!l(this, J).call(this)) {
         l(this, p).style.opacity = "0";
         return;
       }
       l(this, p).style.opacity = "1";
-      const s = (window.scrollY - l(this, D)) / l(this, A) * 100;
-      u(this, k, Math.min(100, Math.max(0, s))), l(this, T) && (l(this, T).style.width = `${l(this, k)}%`);
+      const s = (window.scrollY - l(this, $)) / l(this, v) * 100;
+      console.log(window.scrollY, l(this, $), l(this, v), s), u(this, D, Math.min(100, Math.max(0, s))), l(this, T) && (l(this, T).style.width = `${l(this, D)}%`);
     }), u(this, X, (r, o) => {
       let s = !1;
       return () => {
@@ -675,7 +675,7 @@ class Ve extends mt {
           s = !1;
         }, o));
       };
-    }), u(this, Y, l(this, X).call(this, l(this, L), 16)), u(this, J, () => l(this, d) ? l(this, d).getBoundingClientRect().top <= 0 && l(this, d).getBoundingClientRect().bottom > 0 : !1), u(this, Z, (r, o) => {
+    }), u(this, Y, l(this, X).call(this, l(this, O), 8)), u(this, J, () => l(this, d) ? l(this, d).getBoundingClientRect().top <= 0 && l(this, d).getBoundingClientRect().bottom > 0 : !1), u(this, Z, (r, o) => {
       let s = null;
       return (...c) => {
         s && clearTimeout(s), s = setTimeout(() => {
@@ -686,7 +686,7 @@ class Ve extends mt {
       if (l(this, _).usePreview) {
         await l(this, Q).call(this);
         const r = new Tt(this);
-        u(this, R, r.createTimeline(l(this, v)));
+        u(this, R, r.createTimeline(l(this, L)));
       }
     }, 300)), u(this, Q, async () => {
       if (l(this, d))
@@ -710,7 +710,7 @@ class Ve extends mt {
             },
             backgroundColor: getComputedStyle(document.body).backgroundColor || "#ffffff"
           });
-          return u(this, F, r), u(this, B, s.width), u(this, O, s), s;
+          return u(this, F, r), u(this, B, s.width), u(this, k, s), s;
         } catch (r) {
           return console.error("미리보기 생성 중 오류 발생:", r), null;
         }
@@ -725,7 +725,7 @@ class Ve extends mt {
         if (!o) throw new Error("scrollmetercontainer is not found");
         l(this, d).appendChild(o), l(this, P).observe(l(this, d)), new IntersectionObserver((c) => {
           c.forEach((a) => {
-            a.isIntersecting ? (u(this, $, !0), l(this, L).call(this)) : u(this, $, !1);
+            a.isIntersecting ? (u(this, I, !0), l(this, O).call(this)) : u(this, I, !1);
           });
         }).observe(l(this, d)), window.addEventListener("scroll", l(this, Y));
       } catch (r) {
@@ -736,7 +736,7 @@ class Ve extends mt {
         const { color: r, background: o, height: s } = l(this, _).barOptions;
         r && l(this, p).style.setProperty("--scrollmeter-bar-color", r), o && l(this, p).style.setProperty("--scrollmeter-bar-background", o), s && l(this, p).style.setProperty("--scrollmeter-bar-height", `${s}px`);
       }
-    }, this.getTargetContainer = () => l(this, d), this.getScrollmeterContainer = () => l(this, p), this.getCaptureCanvas = () => l(this, O) || null, this.getCanvasRatio = () => l(this, B) / l(this, F), this.getDefaultOptions = () => l(this, _), this.updateScrollmeterStyle = (r) => {
+    }, this.getTargetContainer = () => l(this, d), this.getScrollmeterContainer = () => l(this, p), this.getCaptureCanvas = () => l(this, k) || null, this.getCanvasRatio = () => l(this, B) / l(this, F), this.getDefaultOptions = () => l(this, _), this.updateScrollmeterStyle = (r) => {
       var o;
       if (u(this, _, r), this.setCSSCustomProperties(), (o = l(this, R)) == null || o.setCSSCustomProperties(), l(this, _) && l(this, _).tooltipOptions) {
         const { background: s, fontColor: c, fontSize: a, paddingBlock: f, paddingInline: g, width: m } = l(this, _).tooltipOptions;
@@ -744,10 +744,10 @@ class Ve extends mt {
       }
     };
     const { targetId: i } = n;
-    u(this, _, n), u(this, d, document.getElementById(i) ?? null), u(this, p, null), u(this, T, null), u(this, P, null), u(this, O, null), u(this, R, null), u(this, H, 0), u(this, k, 0), u(this, A, 0), u(this, D, 0), u(this, v, 0), u(this, F, 0), u(this, B, 0), u(this, $, !1), l(this, q).call(this), l(this, N).call(this);
+    u(this, _, n), u(this, d, document.getElementById(i) ?? null), u(this, p, null), u(this, T, null), u(this, P, null), u(this, k, null), u(this, R, null), u(this, A, 0), u(this, D, 0), u(this, v, 0), u(this, $, 0), u(this, L, 0), u(this, F, 0), u(this, B, 0), u(this, I, !1), l(this, q).call(this), l(this, N).call(this);
   }
 }
-_ = new WeakMap(), d = new WeakMap(), p = new WeakMap(), T = new WeakMap(), P = new WeakMap(), R = new WeakMap(), O = new WeakMap(), H = new WeakMap(), k = new WeakMap(), A = new WeakMap(), D = new WeakMap(), v = new WeakMap(), F = new WeakMap(), B = new WeakMap(), $ = new WeakMap(), q = new WeakMap(), j = new WeakMap(), G = new WeakMap(), M = new WeakMap(), L = new WeakMap(), X = new WeakMap(), Y = new WeakMap(), J = new WeakMap(), Z = new WeakMap(), K = new WeakMap(), Q = new WeakMap(), N = new WeakMap();
+_ = new WeakMap(), d = new WeakMap(), p = new WeakMap(), T = new WeakMap(), P = new WeakMap(), R = new WeakMap(), k = new WeakMap(), A = new WeakMap(), D = new WeakMap(), v = new WeakMap(), $ = new WeakMap(), L = new WeakMap(), F = new WeakMap(), B = new WeakMap(), I = new WeakMap(), q = new WeakMap(), j = new WeakMap(), G = new WeakMap(), M = new WeakMap(), O = new WeakMap(), X = new WeakMap(), Y = new WeakMap(), J = new WeakMap(), Z = new WeakMap(), K = new WeakMap(), Q = new WeakMap(), N = new WeakMap();
 const Ue = (t) => {
   try {
     return new Ve(t);

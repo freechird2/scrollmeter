@@ -9,3 +9,5 @@ export const createScrollmeter = (options: ScrollmeterOptions): Scrollmeter | nu
         return null
     }
 }
+
+export type { ScrollmeterOptions } from './types/scrollmeter.types'
