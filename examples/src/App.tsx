@@ -1,14 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { createScrollmeter } from '@scrollmeter/core'
-import '@scrollmeter/core/dist/index.css'
 import styled from 'styled-components'
-import type { ScrollmeterOptions } from '../../core/dist/types/scrollmeter.types'
 import ScrollIcon from './components/ScrollIcon'
-// import ScrollIcon from './components/ScrollIcon'
-// import { createScrollmeter } from '@scrollmeter/core'
-// import { ScrollmeterOptions } from '@scrollmeter/core'
-// import '@scrollmeter/core/dist/index.css'
+import { createScrollmeter, ScrollmeterOptions } from '@scrollmeter/core'
+import '@scrollmeter/core/dist/index.css'
 
 const breakpoints = {
   mobile: '320px',
@@ -163,7 +158,7 @@ window.onload = function() {
           </Description>
           <Code $isExpanded={true}>
             {`import { useEffect } from 'react';
-import { createScrollmeter } from '@scrollmeter/core';
+import { createScrollmeter, ScrollmeterOptions } from '@scrollmeter/core'
 import '@scrollmeter/core/dist/index.css';
 
 function App() {
@@ -259,7 +254,7 @@ window.onload = function() {
           </Description>
           <Code $isExpanded={isReactExpanded}>
             {`import { useEffect } from 'react';
-import { createScrollmeter } from '@scrollmeter/core';
+import { createScrollmeter, ScrollmeterOptions } from '@scrollmeter/core'
 import '@scrollmeter/core/dist/index.css';
 
 function App() {
