@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/freechird2/scrollmeter/compare/v1.0.0...v1.0.1) (2024-12-17)
+
+
+### Bug Fixes
+
+* throttle 시간 조정(16 -> 8) ([57688e8](https://github.com/freechird2/scrollmeter/commit/57688e80b2d359cecef0cd9d5f8cf5f88b391727))
+
 # 1.0.0 (2024-12-17)
 
 
