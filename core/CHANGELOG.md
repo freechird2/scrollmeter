@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/freechird2/scrollmeter/compare/v1.0.1...v1.0.2) (2024-12-17)
+
+
+### Bug Fixes
+
+* 버그 수정 ([7d9c856](https://github.com/freechird2/scrollmeter/commit/7d9c8561effd92129df605592beeec8e34e69770))
+* 버그 수정 ([383781c](https://github.com/freechird2/scrollmeter/commit/383781c0dbfd225249c095e3f060f6ef8db18604))
+
 ## [1.0.1](https://github.com/freechird2/scrollmeter/compare/v1.0.0...v1.0.1) (2024-12-17)
 
 
