@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/freechird2/scrollmeter/compare/v1.0.3...v1.0.4) (2024-12-17)
+
+
+### Bug Fixes
+
+* npm readme 영어로 변경 ([a5eb3b3](https://github.com/freechird2/scrollmeter/commit/a5eb3b32a4096db6c03a4f1ae4585516f0fe4763))
+
 ## [1.0.3](https://github.com/freechird2/scrollmeter/compare/v1.0.2...v1.0.3) (2024-12-17)
 
 
