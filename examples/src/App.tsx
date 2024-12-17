@@ -91,7 +91,7 @@ function App() {
     <MainContainer id="target">
       <ScrollIcon />
       <Section>
-        <H1 $fontSize={'4rem'}>
+        <H1 $fontSize={'4.6rem'}>
           Thank you for using
           <br />
           the Scrollmeter
@@ -532,7 +532,7 @@ const Section = styled.div`
   margin: 0 auto;
 
   & + & {
-    margin-top: 100px;
+    margin-top: 80px;
   }
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -541,7 +541,7 @@ const Section = styled.div`
 `
 
 const H1 = styled.h1<{ $fontSize?: string }>`
-  font-size: ${({ $fontSize }) => $fontSize ?? '3.2rem'};
+  font-size: ${({ $fontSize }) => $fontSize ?? '4rem'};
   color: rgba(255, 255, 255, 0.87);
   text-align: center;
   line-height: 1.2;
@@ -551,7 +551,7 @@ const H1 = styled.h1<{ $fontSize?: string }>`
 const Content = styled.div<{ $textAlign?: 'left' | 'center' }>`
   max-width: 600px;
   margin: 40px auto 0;
-  font-size: 1.6rem;
+  font-size: 2.2rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.87);
   text-align: ${({ $textAlign }) => $textAlign ?? 'center'};
@@ -570,7 +570,7 @@ const Ul = styled.ul`
   max-width: 500px;
 
   > li {
-    font-size: 1.4rem;
+    font-size: 2rem;
     color: rgba(255, 255, 255, 0.87);
     line-height: 1.5;
     word-break: keep-all;
@@ -581,7 +581,7 @@ const Ul = styled.ul`
   }
 
   li + li {
-    margin-top: 10px;
+    margin-top: 14px;
   }
 `
 
@@ -589,7 +589,8 @@ const Code = styled.div<{ $isExpanded?: boolean }>`
   width: 100%;
   background-color: #151b23;
   padding: 16px;
-  font-size: 1.2rem;
+  font-family: 'Elice Digital Coding', 'monospace';
+  font-size: 1.6rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.87);
   text-align: left;
@@ -634,7 +635,7 @@ const ExpandButton = styled.button`
 `
 
 const Description = styled.p<{ $textAlign?: 'left' | 'center' }>`
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   color: rgba(255, 255, 255, 0.87);
   line-height: 1.5;
   word-break: keep-all;
@@ -666,7 +667,7 @@ const Table = styled.table`
     text-align: left;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.87);
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
 
   th {
@@ -677,29 +678,29 @@ const Table = styled.table`
   // 컬럼 너비 조정
   th:nth-child(1),
   td:nth-child(1) {
-    width: 25%;
+    width: 30%;
   }
 
   th:nth-child(2),
   td:nth-child(2) {
-    width: 20%;
+    width: 25%;
     color: #4a90e2;
     font-family: monospace;
   }
 
   th:nth-child(3),
   td:nth-child(3) {
-    width: 55%;
+    width: 45%;
   }
 
   // 새로�� 테스트 컬럼 스타일
   th:nth-child(4),
   td:nth-child(4) {
-    width: 150px;
+    width: 130px;
     text-align: center;
 
     @media (max-width: ${breakpoints.tablet}) {
-      width: 100px;
+      width: 80px;
     }
   }
 
