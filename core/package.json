@@ -71,5 +71,19 @@
     "homepage": "https://github.com/freechird2/scrollmeter#readme",
     "bugs": {
         "url": "https://github.com/freechird2/scrollmeter/issues"
-    }
+    },
+    "keywords": [
+        "scroll",
+        "scrollmeter",
+        "scroll-progress",
+        "scroll-indicator",
+        "progress-bar",
+        "scroll-position",
+        "scroll-tracker",
+        "reading-progress",
+        "react",
+        "react-component",
+        "ui-component",
+        "reading-meter"
+    ]
 }
