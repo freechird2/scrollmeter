@@ -1,6 +1,7 @@
 # Scrollmeter
 
 ![npm version](https://img.shields.io/npm/v/@scrollmeter/core)
+![downloads](https://img.shields.io/npm/dm/@scrollmeter/core)
 ![license](https://img.shields.io/npm/l/@scrollmeter/core)
 
 Scrollmeter는 웹 페이지의 스크롤 진행률을 시각적으로 표시해주는 가벼운 JavaScript 라이브러리입니다.
