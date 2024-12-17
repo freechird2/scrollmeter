@@ -1,3 +1,14 @@
+## [1.0.5](https://github.com/freechird2/scrollmeter/compare/v1.0.4...v1.0.5) (2024-12-17)
+
+
+### Bug Fixes
+
+* publish.yml ([5d7d69c](https://github.com/freechird2/scrollmeter/commit/5d7d69c487e52d4a2e6ee791c5bdcde2aa8fdc4c))
+* publish.yml ([8ccbd1d](https://github.com/freechird2/scrollmeter/commit/8ccbd1dad43637a292f0eeb3e71bf591c2d7486a))
+* readme ([cf20ecf](https://github.com/freechird2/scrollmeter/commit/cf20ecfe55da536fc245dc89feea4b4fabd046c1))
+* readme ([d782859](https://github.com/freechird2/scrollmeter/commit/d78285990ff7d29701567da93a8afc5f02fab078))
+* readme ([8dfafc7](https://github.com/freechird2/scrollmeter/commit/8dfafc7c97e2960abcba36d4acb6b9d2241e09d5))
+
 ## [1.0.4](https://github.com/freechird2/scrollmeter/compare/v1.0.3...v1.0.4) (2024-12-17)
 
 
