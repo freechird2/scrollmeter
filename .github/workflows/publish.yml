@@ -16,7 +16,7 @@ permissions:
 
 jobs:
     publish:
-        if: github.event.pull_request.merged == true # PR이 merge 됐을 때만 실행
+        if: github.event.pull_request.merged == true
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
