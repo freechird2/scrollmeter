@@ -6,8 +6,6 @@
 
 Scrollmeter is a lightweight JavaScript library that visually displays the scroll progress of web pages.
 
-![Scrollmeter Demo](./assets/demo.gif)
-
 ## ✨ Key Features
 
 - 🎯 Display scroll progress with an intuitive progress bar
