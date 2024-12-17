@@ -33,3 +33,31 @@ test('scrollmeter bar elements exist', async ({ page }) => {
 
   expect(barColor).toBe('rgba(74, 144, 226, 0.9)')
 })
+
+test('scrollmeter bar width matches scroll ratio', async ({ page }) => {
+  await page.goto('http://localhost:5173/scrollmeter/')
+
+  // 전체 문서 높이와 뷰포트 높이 가져오기
+  const { scrollHeight, clientHeight } = await page.evaluate(() => {
+    return {
+      scrollHeight: document.documentElement.scrollHeight,
+      clientHeight: document.documentElement.clientHeight,
+    }
+  })
+
+  // 100px 스크롤
+  await page.evaluate(() => window.scrollBy(0, 100))
+
+  // bar 요소의 width 가져오기
+  const barElement = page.locator('[class*="scrollmeter_bar"]')
+  const barWidth = await barElement.evaluate((el) => {
+    return window.getComputedStyle(el).width
+  })
+
+  // 예상되는 width 계산 (100px 스크롤 / (전체 높이 - 뷰포트 높이) * 100)
+  const expectedRatio = 100 / (scrollHeight - clientHeight)
+  const expectedWidth = `${expectedRatio * 100}%`
+
+  // width 비교
+  expect(barWidth).toBe(expectedWidth)
+})

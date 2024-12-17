@@ -11,6 +11,7 @@
         "build:core": "yarn workspace @scrollmeter/core build",
         "publish:core": "yarn workspace @scrollmeter/core publish",
         "examples:dev": "yarn workspace examples dev",
-        "examples:deploy": "cd examples && yarn deploy"
+        "examples:deploy": "cd examples && yarn deploy",
+        "test:ui": "yarn workspace examples test:ui"
     }
 }
