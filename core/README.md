@@ -184,4 +184,4 @@ function App() {
 
 MIT License
 
-Copyright (c) 2024 suhyeon.jeon
+Copyright (c) 2024 suhyeon-jeon
