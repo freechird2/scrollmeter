@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/freechird2/scrollmeter/compare/v1.0.2...v1.0.3) (2024-12-17)
+
+
+### Bug Fixes
+
+* update package.json with repository info and README ([a0b791b](https://github.com/freechird2/scrollmeter/commit/a0b791b050e92ab678a8f1918d117b02f16adbb4))
+
 ## [1.0.2](https://github.com/freechird2/scrollmeter/compare/v1.0.1...v1.0.2) (2024-12-17)
 
 
