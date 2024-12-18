@@ -1,7 +1,7 @@
 # Scrollmeter
 
 ![npm version](https://img.shields.io/npm/v/@scrollmeter/core)
-![downloads](https://img.shields.io/npm/dm/@scrollmeter/core)
+![downloads](https://img.shields.io/npm/dt/@scrollmeter/core)
 ![license](https://img.shields.io/npm/l/@scrollmeter/core)
 
 Scrollmeter is a lightweight JavaScript library that visually displays the scroll progress of web pages.
