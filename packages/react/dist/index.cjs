@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const r=require("react"),t=u=>{const e=r.useRef(null);return r.useEffect(()=>{e.current&&console.log("targetRef.current",e.current)},[e.current]),{targetRef:e}};exports.useScrollmeter=t;
