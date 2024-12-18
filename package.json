@@ -2,7 +2,8 @@
     "name": "scrollmeter-workspace",
     "private": true,
     "workspaces": [
-        "core",
+        "packages/core",
+        "packages/react",
         "react-examples"
     ],
     "scripts": {
