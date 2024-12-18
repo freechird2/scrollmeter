@@ -1,6 +1,6 @@
 {
     "name": "@scrollmeter/core",
-    "version": "0.0.0-development",
+    "version": "1.1.0",
     "description": "Scrollmeter is a lightweight JavaScript library that visually displays scroll progress on web pages.",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
