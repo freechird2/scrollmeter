@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/freechird2/scrollmeter/compare/v1.1.0...v1.1.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* package.json ([3654285](https://github.com/freechird2/scrollmeter/commit/36542858fff24de81ac64b80fbf50f6b715e1473))
+* ScrollmeterOptions값 변경 ([bde554a](https://github.com/freechird2/scrollmeter/commit/bde554a1789a3118c8503eaf5f0fa2dd872250a1))
+
 # [1.1.0](https://github.com/freechird2/scrollmeter/compare/v1.0.5...v1.1.0) (2024-12-18)
 
 
