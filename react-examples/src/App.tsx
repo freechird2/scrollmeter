@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
-import { createScrollmeter, ScrollmeterOptions } from '@scrollmeter/core'
 import '@scrollmeter/core/dist/index.css'
-import { useScrollmeter } from '@scrollmeter/react'
+import { useScrollmeter, UseScrollmeterOptions } from '@scrollmeter/react'
+
 import styled from 'styled-components'
 import ScrollIcon from './components/ScrollIcon'
 
@@ -13,15 +13,7 @@ const breakpoints = {
 }
 
 function App() {
-  const { targetRef } = useScrollmeter({
-    useTimeline: true,
-    useTooltip: true,
-    usePreview: true,
-  })
-
-  const scrollmeter = useRef<ReturnType<typeof createScrollmeter> | null>(null)
-  const [scrollOptions, setScrollOptions] = useState<ScrollmeterOptions>({
-    target: 'target',
+  const [scrollOptions, setScrollOptions] = useState<UseScrollmeterOptions>({
     useTimeline: true,
     useTooltip: true,
     usePreview: true,
@@ -43,11 +35,13 @@ function App() {
       width: 150,
     },
   })
+  const { targetRef } = useScrollmeter<HTMLDivElement>(scrollOptions)
+
   const [isJsExpanded, setIsJsExpanded] = useState(false)
   const [isReactExpanded, setIsReactExpanded] = useState(false)
 
   const updateScrollbarOptions = (
-    key: keyof Required<ScrollmeterOptions>['barOptions'],
+    key: keyof Required<UseScrollmeterOptions>['barOptions'],
     value: string | number | boolean | object,
   ) => {
     setScrollOptions((prev) => {
@@ -59,7 +53,7 @@ function App() {
   }
 
   const updateScrollbarTimelineOptions = (
-    key: keyof Required<ScrollmeterOptions>['timelineOptions'],
+    key: keyof Required<UseScrollmeterOptions>['timelineOptions'],
     value: string | number | boolean | object,
   ) => {
     setScrollOptions((prev) => {
@@ -71,7 +65,7 @@ function App() {
   }
 
   const updateTooltipOptions = (
-    key: keyof Required<ScrollmeterOptions>['tooltipOptions'],
+    key: keyof Required<UseScrollmeterOptions>['tooltipOptions'],
     value: string | number | boolean | object,
   ) => {
     setScrollOptions((prev) => {
@@ -82,19 +76,8 @@ function App() {
     })
   }
 
-  useEffect(() => {
-    if (scrollmeter.current) return
-    scrollmeter.current = createScrollmeter(scrollOptions)
-  }, [])
-
-  useEffect(() => {
-    if (scrollmeter.current) {
-      scrollmeter.current.updateScrollmeterStyle(scrollOptions)
-    }
-  }, [scrollOptions])
-
   return (
-    <MainContainer id="target">
+    <MainContainer ref={targetRef}>
       <ScrollIcon />
       <Section>
         <H1 $fontSize={'4.6rem'}>
@@ -315,9 +298,9 @@ function App() {
                   <input
                     type="color"
                     defaultValue="#4A90E2"
-                    onChange={(e) =>
-                      updateScrollbarOptions('color', e.target.value)
-                    }
+                    // onChange={(e) =>
+                    //   updateScrollbarOptions('color', e.target.value)
+                    // }
                   />
                 </td>
               </tr>

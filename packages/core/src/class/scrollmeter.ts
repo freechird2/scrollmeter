@@ -69,26 +69,7 @@ export class Scrollmeter extends IScrollmeter {
 
             this.#containerHeight = entries[0].contentRect.height
 
-            const marginTop = parseInt(window.getComputedStyle(this.#targetContainer).marginTop)
-            const marginBottom = parseInt(window.getComputedStyle(this.#targetContainer).marginBottom)
-            this.#elementTop = window.scrollY + this.#targetContainer.getBoundingClientRect().top
-            this.#totalHeight = this.#targetContainer.clientHeight + marginTop + marginBottom - document.documentElement.clientHeight
-
-            this.#updateBarWidth()
-
-            if (this.#defaultOptions.useTimeline) {
-                document.querySelectorAll(`.${styles.scrollmeter_timeline}`).forEach((element) => {
-                    element.remove()
-                })
-
-                if (this.#defaultOptions.usePreview) {
-                    this.#debouncedCaptureContainer()
-                } else {
-                    const timeline = new ScrollmeterTimeline(this)
-
-                    this.#timelineElements = timeline.createTimeline(this.#highestZIndex)
-                }
-            }
+            this.render(this.#defaultOptions)
         })
     }
 
@@ -326,8 +307,33 @@ export class Scrollmeter extends IScrollmeter {
         return this.#defaultOptions
     }
 
+    public render = (options: ScrollmeterOptions) => {
+        this.#defaultOptions = { ...this.#defaultOptions, ...options }
+
+        const marginTop = parseInt(window.getComputedStyle(this.#targetContainer).marginTop)
+        const marginBottom = parseInt(window.getComputedStyle(this.#targetContainer).marginBottom)
+        this.#elementTop = window.scrollY + this.#targetContainer.getBoundingClientRect().top
+        this.#totalHeight = this.#targetContainer.clientHeight + marginTop + marginBottom - document.documentElement.clientHeight
+
+        this.#updateBarWidth()
+
+        if (this.#defaultOptions.useTimeline) {
+            document.querySelectorAll(`.${styles.scrollmeter_timeline}`).forEach((element) => {
+                element.remove()
+            })
+
+            if (this.#defaultOptions.usePreview) {
+                this.#debouncedCaptureContainer()
+            } else {
+                const timeline = new ScrollmeterTimeline(this)
+
+                this.#timelineElements = timeline.createTimeline(this.#highestZIndex)
+            }
+        }
+    }
+
     public updateScrollmeterStyle = (options: ScrollmeterOptions) => {
-        this.#defaultOptions = options
+        this.#defaultOptions = { ...this.#defaultOptions, ...options }
 
         this.setCSSCustomProperties()
 

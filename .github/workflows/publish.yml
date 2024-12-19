@@ -20,14 +20,19 @@ jobs:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
               with:
-                  node-version: '20.x'
+                  node-version: 20
                   registry-url: 'https://registry.npmjs.org'
 
             - name: Install dependencies
-              run: yarn install
+              run: |
+                  yarn install
+                  cd packages/core && yarn install
+                  cd ../react && yarn install
 
-            - name: Build
-              run: yarn build:core
+            - name: Build packages
+              run: |
+                  cd packages/core && yarn build
+                  cd ../react && yarn build
 
             - name: Semantic Release
               env:
