@@ -298,9 +298,9 @@ function App() {
                   <input
                     type="color"
                     defaultValue="#4A90E2"
-                    // onChange={(e) =>
-                    //   updateScrollbarOptions('color', e.target.value)
-                    // }
+                    onChange={(e) =>
+                      updateScrollbarOptions('color', e.target.value)
+                    }
                   />
                 </td>
               </tr>
