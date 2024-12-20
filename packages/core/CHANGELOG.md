@@ -1,3 +1,17 @@
+# [1.2.0](https://github.com/freechird2/scrollmeter/compare/v1.1.1...v1.2.0) (2024-12-20)
+
+
+### Bug Fixes
+
+* publish.yml ([9fda1d4](https://github.com/freechird2/scrollmeter/commit/9fda1d412e0c338b0b16cc8c565d5b4d69eeb15d))
+* publish.yml ([3caddaa](https://github.com/freechird2/scrollmeter/commit/3caddaa696604bbe73573d0c14e00182f85ebff5))
+* publish.yml ([fec7372](https://github.com/freechird2/scrollmeter/commit/fec7372b195e7615e187608fa8e8930f9a205589))
+
+
+### Features
+
+* react hook을 위해 core 수정 ([c15c129](https://github.com/freechird2/scrollmeter/commit/c15c12942f853170f545389501a21c496cf6723c))
+
 ## [1.1.1](https://github.com/freechird2/scrollmeter/compare/v1.1.0...v1.1.1) (2024-12-18)
 
 
