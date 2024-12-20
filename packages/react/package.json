@@ -1,6 +1,13 @@
 {
     "name": "@scrollmeter/react",
-    "version": "1.0.0",
+    "version": "0.0.0",
+    "description": "React hooks and components for Scrollmeter - A lightweight JavaScript library that visually displays scroll progress on web pages",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/freechird2/scrollmeter.git"
+    },
+    "homepage": "https://github.com/freechird2/scrollmeter#readme",
+    "license": "MIT",
     "main": "dist/index.js",
     "module": "./dist/index.mjs",
     "types": "dist/index.d.ts",

@@ -4,6 +4,15 @@ on:
     push:
         branches:
             - main
+    workflow_dispatch:
+        inputs:
+            package:
+                description: 'Package to publish (core or react)'
+                required: true
+                type: choice
+                options:
+                    - core
+                    - react
 
 permissions:
     contents: write
@@ -14,7 +23,28 @@ permissions:
     statuses: write
 
 jobs:
+    check-changes:
+        runs-on: ubuntu-latest
+        outputs:
+            core-changed: ${{ steps.changes.outputs.core }}
+            react-changed: ${{ steps.changes.outputs.react }}
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Check for changes
+              id: changes
+              uses: tj-actions/changed-files@v42
+              with:
+                  files_yaml: |
+                      core:
+                        - packages/core/**
+                      react:
+                        - packages/react/**
+
     publish:
+        needs: check-changes
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
@@ -24,19 +54,23 @@ jobs:
                   registry-url: 'https://registry.npmjs.org'
 
             - name: Install dependencies
+              run: yarn install
+
+            - name: Process Core Package
+              if: needs.check-changes.outputs.core-changed == 'true' || github.event.inputs.package == 'core'
               run: |
+                  cd packages/core
                   yarn install
-                  cd packages/core && yarn install
-                  cd ../react && yarn install
+                  yarn build
+                  npx semantic-release --debug --force-publish
 
-            - name: Build packages
+            - name: Process React Package
+              if: needs.check-changes.outputs.react-changed == 'true' || github.event.inputs.package == 'react'
               run: |
-                  cd packages/core && yarn build
-                  cd ../react && yarn build
-
-            - name: Semantic Release
+                  cd packages/react
+                  yarn install
+                  yarn build
+                  npx semantic-release --debug --force-publish
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-              working-directory: ./packages/core
-              run: npx semantic-release --debug --force-publish
