@@ -1,3 +1,5 @@
+<!-- prettier-ignore-start -->
+
 # Scrollmeter React
 
 ![npm version](https://img.shields.io/npm/v/@scrollmeter/react)
@@ -29,21 +31,24 @@ yarn add @scrollmeter/react
 
 ## 🔧 Usage
 
-Use the `useScrollmeter` hook by providing the target container ID where you want to display scroll progress.
+In a React environment, use the useScrollmeter hook which provides a targetRef.
 
 ```jsx
 import { useScrollmeter } from '@scrollmeter/react'
 import '@scrollmeter/core/dist/index.css'
 
 function App() {
-    const { targetRef } =
-        useScrollmeter <
-        HTMLDivElement >
-        {
-            useTimeline: true,
-            useTooltip: true,
-            usePreview: true,
-        }
+    const { targetRef } = useScrollmeter<HTMLDivElement>({
+        useTimeline: true,
+        useTooltip: true,
+        usePreview: true,
+        barOptions: {
+            color: 'rgba(74, 144, 226, 0.9)',
+            height: 10,
+            background: 'rgba(0, 0, 0, 0)',
+        },
+        // ... rest of the options ...
+    })
 
     return <div ref={targetRef}>{/* Your content here */}</div>
 }
@@ -64,14 +69,11 @@ import { useScrollmeter, UseScrollmeterOptions } from '@scrollmeter/react'
 import '@scrollmeter/core/dist/index.css'
 
 function App() {
-    const [scrollOptions, setScrollOptions] =
-        useState <
-        UseScrollmeterOptions >
-        {
-            useTimeline: true,
-            useTooltip: true,
-            usePreview: true,
-            barOptions: {
+    const [scrollOptions, setScrollOptions] = useState<UseScrollmeterOptions>({
+        useTimeline: true,
+        useTooltip: true,
+        usePreview: true,
+        barOptions: {
                 color: 'rgba(74, 144, 226, 0.9)',
                 height: 10,
                 background: 'rgba(0, 0, 0, 0)',
@@ -87,10 +89,10 @@ function App() {
                 paddingInline: 8,
                 paddingBlock: 6,
                 width: 150,
-            },
-        }
+        },
+    })
 
-    const { targetRef } = useScrollmeter < HTMLDivElement > scrollOptions
+    const { targetRef } = useScrollmeter<HTMLDivElement>(scrollOptions)
 
     return <div ref={targetRef}>{/* Your content here */}</div>
 }
@@ -131,3 +133,5 @@ function App() {
 MIT License
 
 Copyright (c) 2024 suhyeon-jeon
+
+<!-- prettier-ignore-end -->
