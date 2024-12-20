@@ -65,6 +65,9 @@ jobs:
                   npm install --frozen-lockfile
                   npm run build
                   npx semantic-release --debug --force-publish
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: Process React Package
               if: needs.check-changes.outputs.react-changed == 'true' || github.event.inputs.package == 'react'
