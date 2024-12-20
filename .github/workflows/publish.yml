@@ -56,22 +56,22 @@ jobs:
             - name: Install dependencies
               run: |
                   rm -f package-lock.json
-                  yarn install --frozen-lockfile
+                  npm install --frozen-lockfile
 
             - name: Process Core Package
               if: needs.check-changes.outputs.core-changed == 'true' || github.event.inputs.package == 'core'
               run: |
                   cd packages/core
-                  yarn install --frozen-lockfile
-                  yarn build
+                  npm install --frozen-lockfile
+                  npm run build
                   npx semantic-release --debug --force-publish
 
             - name: Process React Package
               if: needs.check-changes.outputs.react-changed == 'true' || github.event.inputs.package == 'react'
               run: |
                   cd packages/react
-                  yarn install --frozen-lockfile
-                  yarn build
+                  npm install --frozen-lockfile
+                  npm run build
                   npx semantic-release --debug --force-publish
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
