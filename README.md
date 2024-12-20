@@ -1,8 +1,17 @@
+<!-- prettier-ignore-start -->
 # Scrollmeter
+
+## @scrollmeter/core
 
 ![npm version](https://img.shields.io/npm/v/@scrollmeter/core)
 ![downloads](https://img.shields.io/npm/dt/@scrollmeter/core)
 ![license](https://img.shields.io/npm/l/@scrollmeter/core)
+
+## @scrollmeter/react
+
+![npm version](https://img.shields.io/npm/v/@scrollmeter/react)
+![downloads](https://img.shields.io/npm/dt/@scrollmeter/react)
+![license](https://img.shields.io/npm/l/@scrollmeter/react)
 
 Scrollmeter is a lightweight JavaScript library that visually displays the scroll progress of web pages.
 
@@ -19,74 +28,35 @@ Scrollmeter is a lightweight JavaScript library that visually displays the scrol
 
 ## 🚀 Installation
 
-```
+### For Javascript Projects
+
+For Javascript environments, you only need to install the core package:
+
+```bash
 npm install @scrollmeter/core
-```
-
-or
-
-```
+# or
 yarn add @scrollmeter/core
+```
+
+### For React Projects
+
+For React environments, you only need to install the react package (@scrollmeter/core will be installed automatically as a dependency):
+
+```bash
+npm install @scrollmeter/react
+# or
+yarn add @scrollmeter/react
 ```
 
 ## 🔧 Usage
 
-Specify an ID for the container element where you want to display scroll progress, and call the createScrollmeter function with that ID as the targetId option.
+Pass either an ID or DOM element reference of the container where you want to display the scroll progress as the 'target' option.
 
 ### Javascript
 
 In a regular JavaScript environment, call the createScrollmeter function after the DOM is fully loaded.
 
-```javascript
-import { createScrollmeter } from '@scrollmeter/core'
-import '@scrollmeter/core/dist/index.css'
-
-window.onload = function () {
-    createScrollmeter({
-        targetId: 'container_id_to_measure',
-        useTimeline: true,
-        useTooltip: true,
-        usePreview: true,
-    })
-}
-```
-
-### React
-
-In a React environment, use the useEffect hook to call createScrollmeter when the component mounts.
-
-```javascript
-import { useEffect } from 'react'
-import { createScrollmeter } from '@scrollmeter/core'
-import '@scrollmeter/core/dist/index.css'
-
-function App() {
-    const [scrollOptions, setScrollOptions] = useState({
-        targetId: 'container_id_to_measure',
-        useTimeline: true,
-        useTooltip: true,
-        usePreview: true,
-    })
-
-    useEffect(() => {
-        createScrollmeter(scrollOptions)
-    }, [])
-
-    return <div id='container_id_to_measure'>{/* Content you want to measure scroll for */}</div>
-}
-```
-
-## ⚙️ Configuration Options
-
-- **useTimeline**: Enable/disable timeline feature showing document structure
-- **useTooltip**: Show/hide tooltip displaying current scroll position
-- **usePreview**: Enable/disable content preview feature
-    - ⚠️ Preview feature requires useTooltip to be set to true
-    - ⚠️ External images are not included in previews due to CORS restrictions
-
-## 🎨 Style Customization
-
-### javascript
+The target option accepts either an ID string or a DOM element reference for the container where you want to display the scroll progress.
 
 ```javascript
 import { createScrollmeter } from '@scrollmeter/core'
@@ -94,7 +64,7 @@ import '@scrollmeter/core/dist/index.css'
 
 window.onload = function () {
     let scrollOptions = {
-        targetId: 'container_id_to_measure',
+        target: 'container_id_to_measure', // id or DOM element reference
         useTimeline: true,
         useTooltip: true,
         usePreview: true,
@@ -117,38 +87,41 @@ window.onload = function () {
 
 ### React
 
+In a React environment, use the useScrollmeter hook which provides a targetRef.
+
 ```javascript
-import { useEffect } from 'react';
-import { createScrollmeter, ScrollmeterOptions } from '@scrollmeter/core'
-import '@scrollmeter/core/dist/index.css';
+import { useEffect } from 'react'
+import { useScrollmeter, UseScrollmeterOptions } from '@scrollmeter/react'
+import '@scrollmeter/core/dist/index.css'
 
 function App() {
-    const scrollmeter = useRef<ReturnType<typeof createScrollmeter> | null>(null);
-    const [scrollOptions, setScrollOptions] = useState<ScrollmeterOptions>({
-        targetId: 'container_id_to_measure',
+    const [scrollOptions, setScrollOptions] = useState<UseScrollmeterOptions>({
         useTimeline: true,
         useTooltip: true,
         usePreview: true,
-    });
+        barOptions: {
+            color: 'rgba(74, 144, 226, 0.9)',
+            height: 10,
+            background: 'rgba(0, 0, 0, 0)',
+        },
+        // ... rest of the options ...
+    })
 
-    useEffect(() => {
-        if (scrollmeter.current) return;
-        scrollmeter.current = createScrollmeter(scrollOptions);
-    }, []);
+    const { targetRef } = useScrollmeter<HTMLDivElement>(scrollOptions)
 
-    useEffect(() => {
-        if (scrollmeter.current) {
-            scrollmeter.current.updateScrollmeterStyle(scrollOptions);
-        }
-    }, [scrollOptions]);
-
-    return (
-        <div id="container_id_to_measure">
-            {/* Content you want to measure scroll for */}
-        </div>
-    );
+    return <div ref={targetRef}>{/* Content you want to measure scroll for */}</div>
 }
 ```
+
+## ⚙️ Configuration Options
+
+- **useTimeline**: Enable/disable timeline feature showing document structure
+- **useTooltip**: Show/hide tooltip displaying current scroll position
+- **usePreview**: Enable/disable content preview feature
+    - ⚠️ Preview feature requires useTooltip to be set to true
+    - ⚠️ External images are not included in previews due to CORS restrictions
+
+## 🎨 Style Customization
 
 ### barOptions
 
@@ -184,4 +157,6 @@ function App() {
 
 MIT License
 
-Copyright (c) 2024 suhyeon.jeon
+Copyright (c) 2024 suhyeon-jeon
+
+<!-- prettier-ignore-end -->
