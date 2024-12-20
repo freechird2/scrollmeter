@@ -54,13 +54,15 @@ jobs:
                   registry-url: 'https://registry.npmjs.org'
 
             - name: Install dependencies
-              run: yarn install
+              run: |
+                  rm -f package-lock.json
+                  yarn install --frozen-lockfile
 
             - name: Process Core Package
               if: needs.check-changes.outputs.core-changed == 'true' || github.event.inputs.package == 'core'
               run: |
                   cd packages/core
-                  yarn install
+                  yarn install --frozen-lockfile
                   yarn build
                   npx semantic-release --debug --force-publish
 
@@ -68,7 +70,7 @@ jobs:
               if: needs.check-changes.outputs.react-changed == 'true' || github.event.inputs.package == 'react'
               run: |
                   cd packages/react
-                  yarn install
+                  yarn install --frozen-lockfile
                   yarn build
                   npx semantic-release --debug --force-publish
               env:
