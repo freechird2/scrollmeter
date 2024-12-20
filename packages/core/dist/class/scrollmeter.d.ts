@@ -8,5 +8,6 @@ export declare class Scrollmeter extends IScrollmeter {
     getCaptureCanvas: () => HTMLCanvasElement;
     getCanvasRatio: () => number;
     getDefaultOptions: () => ScrollmeterOptions;
+    render: (options: ScrollmeterOptions) => void;
     updateScrollmeterStyle: (options: ScrollmeterOptions) => void;
 }

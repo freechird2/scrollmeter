@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "target": "ES2015",
+        "module": "ESNext",
+        "lib": ["DOM", "ESNext"],
+        "declaration": true,
+        "declarationDir": "./dist",
+        "emitDeclarationOnly": true,
+        "outDir": "dist",
+        "strict": true,
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "jsx": "react",
+        "types": ["vite/client"]
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+}
