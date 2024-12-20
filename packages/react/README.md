@@ -1,10 +1,10 @@
-# Scrollmeter
+# Scrollmeter React
 
-![npm version](https://img.shields.io/npm/v/@scrollmeter/core)
-![downloads](https://img.shields.io/npm/dt/@scrollmeter/core)
-![license](https://img.shields.io/npm/l/@scrollmeter/core)
+![npm version](https://img.shields.io/npm/v/@scrollmeter/react)
+![downloads](https://img.shields.io/npm/dt/@scrollmeter/react)
+![license](https://img.shields.io/npm/l/@scrollmeter/react)
 
-Scrollmeter is a lightweight JavaScript library that visually displays the scroll progress of web pages.
+React hook for Scrollmeter, a lightweight library that visually displays the scroll progress of web pages.
 
 ## ✨ Key Features
 
@@ -17,39 +17,37 @@ Scrollmeter is a lightweight JavaScript library that visually displays the scrol
 
 ## 🚀 Installation
 
-```
-npm install @scrollmeter/core
+```bash
+npm install @scrollmeter/react
 ```
 
 or
 
-```
-yarn add @scrollmeter/core
+```bash
+yarn add @scrollmeter/react
 ```
 
 ## 🔧 Usage
 
-Specify an ID for the container element where you want to display scroll progress, and call the createScrollmeter function with that ID as the targetId option.
+Use the `useScrollmeter` hook by providing the target container ID where you want to display scroll progress.
 
-### Javascript
-
-In vanilla JavaScript environments, call the createScrollmeter function after the DOM is fully loaded.
-
-```javascript
-import { createScrollmeter } from '@scrollmeter/core'
+```jsx
+import { useScrollmeter } from '@scrollmeter/react'
 import '@scrollmeter/core/dist/index.css'
 
-window.onload = function () {
-    createScrollmeter({
-        targetId: 'container_id_to_measure',
-        useTimeline: true,
-        useTooltip: true,
-        usePreview: true,
-    })
+function App() {
+    const { targetRef } =
+        useScrollmeter <
+        HTMLDivElement >
+        {
+            useTimeline: true,
+            useTooltip: true,
+            usePreview: true,
+        }
+
+    return <div ref={targetRef}>{/* Your content here */}</div>
 }
 ```
-
-> 💡 For React users, please check out [@scrollmeter/react](https://www.npmjs.com/package/@scrollmeter/react) package.
 
 ## ⚙️ Configuration Options
 
@@ -61,32 +59,40 @@ window.onload = function () {
 
 ## 🎨 Style Customization
 
-### javascript
-
-```javascript
-import { createScrollmeter } from '@scrollmeter/core'
+```jsx
+import { useScrollmeter, UseScrollmeterOptions } from '@scrollmeter/react'
 import '@scrollmeter/core/dist/index.css'
 
-window.onload = function () {
-    let scrollOptions = {
-        targetId: 'container_id_to_measure',
-        useTimeline: true,
-        useTooltip: true,
-        usePreview: true,
-    }
+function App() {
+    const [scrollOptions, setScrollOptions] =
+        useState <
+        UseScrollmeterOptions >
+        {
+            useTimeline: true,
+            useTooltip: true,
+            usePreview: true,
+            barOptions: {
+                color: 'rgba(74, 144, 226, 0.9)',
+                height: 10,
+                background: 'rgba(0, 0, 0, 0)',
+            },
+            timelineOptions: {
+                color: '#838383',
+                width: 4,
+            },
+            tooltipOptions: {
+                background: '#333',
+                fontColor: 'white',
+                fontSize: 12,
+                paddingInline: 8,
+                paddingBlock: 6,
+                width: 150,
+            },
+        }
 
-    const scrollmeter = createScrollmeter(scrollOptions)
+    const { targetRef } = useScrollmeter < HTMLDivElement > scrollOptions
 
-    scrollOptions = {
-        ...scrollOptions,
-        barOptions: {
-            color: '#4A90E2',
-            height: 10,
-            background: 'rgba(0, 0, 0, 0)',
-        },
-    }
-
-    scrollmeter.updateScrollmeterStyle(scrollOptions)
+    return <div ref={targetRef}>{/* Your content here */}</div>
 }
 ```
 
