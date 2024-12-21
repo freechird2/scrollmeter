@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/freechird2/scrollmeter/compare/v1.3.0...v1.3.1) (2024-12-21)
+
+
+### Bug Fixes
+
+* readme 수정 ([4ee58d4](https://github.com/freechird2/scrollmeter/commit/4ee58d4ab5054bca1b063abe939e388a74d6f5c4))
+
 # [1.2.0](https://github.com/freechird2/scrollmeter/compare/v1.1.1...v1.2.0) (2024-12-20)
 
 
