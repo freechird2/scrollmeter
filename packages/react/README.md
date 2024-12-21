@@ -54,6 +54,8 @@ function App() {
 }
 ```
 
+> 💡 For Vanilla JavaScript users, please check out [@scrollmeter/core](https://www.npmjs.com/package/@scrollmeter/core) package.
+
 ## ⚙️ Configuration Options
 
 - **useTimeline**: Enable/disable timeline feature showing document structure
